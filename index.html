@@ -14,7 +14,7 @@
             max-width: 900px;
             font-size: 16px;
             text-align: left;
-            background-color: #d2d2c3;
+            background-color: hsl(50, 40%, 95%);
             position: relative;
         }
 
@@ -25,11 +25,11 @@
         .project {
             display: flex;
             align-items: center;
-            background-color: hsl(60, 25%, 97%);
+            background-color: hsl(60, 25%, 98.5%);
             margin-bottom: 15px;
             padding: 15px;
             border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.05);
             /* Softer shadow for depth */
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
@@ -37,8 +37,9 @@
         .project:hover {
             background-color: #ffffff;
             transform: translateY(-3px);
+            transform: translateX(-10px);
             /* Less movement on hover for subtlety */
-            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+            box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.15);
             /* Slightly deeper shadow on hover */
         }
 
@@ -80,7 +81,8 @@
 
         .project-header {
             font-size: 20px;
-            color: #5a1a1a;
+            font-weight: 600;
+            color: hsl(5, 75%, 25%);
             /* A pop of contrasting blue */
             margin-bottom: 5px;
             /* Tighter spacing */
@@ -107,13 +109,6 @@
             /* Inherits the text color from parent elements */
             display: block;
             /* Makes the link behave like a block, allowing it to contain the .project div */
-        }
-
-        .project-link:hover .project {
-            transform: translateY(-4px);
-            /* Maintains the hover effect */
-            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.5);
-            /* Enhances the shadow on hover for depth */
         }
 
         .split-container {
@@ -155,12 +150,13 @@
             margin-top: 0px;
             margin-left: 15px;
             margin-bottom: 5px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .contact-info:hover {
-            color: #5a1a1a;
+            color: hsl(0, 100%, 30%);
             text-decoration: underline;
-            transform: translateX(5px);
+            transform: translateY(-2px);
         }
 
         .contact-info img {
@@ -219,8 +215,9 @@
         }
 
         h2 {
-            color: #4b5529;
-            ;
+            color: hsl(90, 75%, 15%);
+            font-weight: 700;
+            font-size: 1.75em;
             /* Header color, adjust as needed */
             margin-top: 0px;
             margin-bottom: 0px;
@@ -228,14 +225,15 @@
         }
 
         h3 {
-            color: #4b5529;
-            font-size: 1em;
+            color: hsl(90, 75%, 15%);
+            font-size: 1.1em;
+            font-weight: 700;
             /* Sub-header color, adjust as needed */
             margin-bottom: 0px;
         }
 
         .dates {
-            font-size: 0.9em;
+            font-size: 1em;
             color: #555;
             /* Date text color, adjust as needed */
             margin-top: 0px;
@@ -243,11 +241,11 @@
         }
 
         .subheading {
-            font-size: 0.9em;
+            font-size: 1em;
             color: #3d3c3c;
             /* Date text color, adjust as needed */
             margin-top: 0px;
-            margin-left: 15px;
+            margin-left: 0px;
             margin-bottom: 5px;
         }
 
@@ -255,7 +253,7 @@
         ul {
             list-style-type: disc;
             margin-top: 0px;
-            font-size: 0.8em;
+            font-size: 1em;
             padding-left: 20px;
         }
     </style>
