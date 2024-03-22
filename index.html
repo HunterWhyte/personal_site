@@ -7,35 +7,6 @@
     <title>Hunter Whyte</title>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        nav ul {
-            list-style-type: none;
-            display: flex;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-        }
-
-        nav ul li {
-            float: left;
-            padding: 0 0px;
-        }
-
-        nav ul li a {
-            display: block;
-            color: white;
-            text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
-            transition: background 0.3s ease, color 0.3s ease;
-        }
-
-        nav ul li a:hover,
-        nav ul li a:focus {
-            background-color: #455831;
-            /* Even darker for hover effect */
-            color: #e4e4e4;
-        }
-
         .container {
             padding: 0px;
         }
@@ -43,7 +14,7 @@
         .project {
             display: flex;
             align-items: center;
-            background-color: #ffffff;
+            background-color: #f6f6f3;
             margin-bottom: 15px;
             padding: 15px;
             border-radius: 10px;
@@ -53,6 +24,7 @@
         }
 
         .project:hover {
+            background-color: #ffffff;
             transform: translateY(-3px);
             /* Less movement on hover for subtlety */
             box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
@@ -60,8 +32,9 @@
         }
 
         .profile img {
-            width: 300px;
+            width: 100%;
             height: auto;
+            max-width: 250px;
             margin-left: 0px;
             margin-top: 10px;
             margin-bottom: 7.5px;
@@ -72,17 +45,21 @@
 
         .project img {
             height: auto;
-            width: 225px;
+            width: 25%;
             /* Slightly smaller images for balance */
             margin-left: 5px;
             border-radius: 5px;
         }
 
+        .project:hover img {
+            filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.1));
+        }
+
         .project video {
             height: auto;
-            width: 250px;
+            width: 25%;
             /* Slightly smaller images for balance */
-            margin-left:5px;
+            margin-left: 5px;
             border-radius: 5px;
         }
 
@@ -140,7 +117,7 @@
             /* Each column takes up half the width of the main content area */
             padding: 5px;
             /* Adds some padding around the content of each column */
-            justify-content: center;
+            justify-content: left;
             text-align: left;
         }
 
@@ -153,8 +130,70 @@
             /* Adds some padding around the content of each column */
         }
 
+        .contact-info {
+            text-decoration: none;
+            display: flex;
+            align-items: left;
+            justify-content: left;
+            /* Aligns items vertically in the center */
+            vertical-align: middle;
+            /* Aligns the image in the middle of the text line */
+            font-size: 0.9em;
+            color: #3d3c3c;
+            /* Date text color, adjust as needed */
+            margin-top: 0px;
+            margin-left: 15px;
+            margin-bottom: 5px;
+        }
+
+        .contact-info:hover {
+            color: #5a1a1a;
+            text-decoration: underline;
+            transform: translateX(5px);
+        }
+
+        .contact-info img {
+            height: 15px;
+            /* Slightly smaller images for balance */
+            width: auto;
+            border-radius: 0px;
+            border-radius: 0px;
+            vertical-align: middle;
+            margin-right: 3px;
+            /* Aligns the image in the middle of the text line */
+        }
+
+        /* Layout for landscape orientation (wider than tall) */
+        @media (max-aspect-ratio: 3/4) {
+            .split-container {
+                flex-direction: column;
+                /* Lay children out horizontally */
+            }
+
+            .left-column {
+                flex: 1;
+                /* Make boxes flexible in width */
+                margin: 0 10px;
+                /* Adjust margins for horizontal layout */
+                justify-content: center;
+                text-align: center;
+            }
+
+            .right-column {
+                flex: 1;
+                /* Make boxes flexible in width */
+                margin: 0 10px;
+                /* Adjust margins for horizontal layout */
+            }
+
+            .contact-info {
+                align-items: center;
+                justify-content: center;
+            }
+        }
+
         .card {
-            background-color: #ffffff;
+            background-color: #f6f6f3;
             /* Matches project card background */
             border-radius: 10px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
@@ -169,7 +208,8 @@
         }
 
         h2 {
-            color: #443b00;
+            color: #4b5529;
+            ;
             /* Header color, adjust as needed */
             margin-top: 0px;
             margin-bottom: 0px;
@@ -177,7 +217,7 @@
         }
 
         h3 {
-            color: #606c38;
+            color: #4b5529;
             font-size: 1em;
             /* Sub-header color, adjust as needed */
             margin-bottom: 0px;
@@ -215,42 +255,8 @@
             max-width: 900px;
             font-size: 16px;
             text-align: left;
-            background-color: #e7e6cd;
+            background-color: #dae1d0;
             position: relative;
-        }
-
-        .link-with-image {
-            text-decoration: none;
-            /* Sets the color of the text */
-            display: flex;
-            /* Uses flexbox for alignment */
-            align-items: center;
-            /* Aligns items vertically in the center */
-            vertical-align: middle;
-            /* Aligns the image in the middle of the text line */
-            font-size: 0.9em;
-            color: #3d3c3c;
-            /* Date text color, adjust as needed */
-            margin-top: 0px;
-            margin-left: 15px;
-            margin-bottom: 5px;
-        }
-
-        .link-with-image:hover {
-            color: #5a1a1a;
-            text-decoration: underline;
-            transform: translateX(5px);
-        }
-
-        .link-with-image img {
-            height: 15px;
-            /* Slightly smaller images for balance */
-            width: auto;
-            border-radius: 0px;
-            border-radius: 0px;
-            vertical-align: middle;
-            margin-right: 3px;
-            /* Aligns the image in the middle of the text line */
         }
     </style>
 </head>
@@ -268,26 +274,26 @@
                 <div class="contact">
                     <p></p>
                     <!-- Email Icon -->
-                    <a href="mailto:huntergwhyte@gmail.com" title="Email" class="link-with-image">
+                    <a href="mailto:huntergwhyte@gmail.com" title="Email" class="contact-info">
                         <img src="mail.svg" alt="email">
                         huntergwhyte@gmail.com
                     </a>
 
                     <!-- GitHub Icon -->
-                    <a href="https://github.com/hunterwhyte" title="GitHub" class="link-with-image">
+                    <a href="https://github.com/hunterwhyte" title="GitHub" class="contact-info">
                         <img src="github-mark.svg" alt="github">
                         github.com/hunterwhyte
                     </a>
 
                     <!-- LinkedIn Icon -->
                     <a href="https://www.linkedin.com/in/hunter-whyte-995447161/" title="LinkedIn"
-                        class="link-with-image">
+                        class="contact-info">
                         <img src="linkedin.svg" alt="linkedin">
                         hunterwhyte
                     </a>
 
                     <!-- Resume Icon -->
-                    <a href="pathtoresume" title="resume" class="link-with-image">
+                    <a href="pathtoresume" title="resume" class="contact-info">
                         <img src="resume.svg" alt="resume">
                         resume
                     </a>
@@ -325,7 +331,7 @@
                 <h3>University of Saskatchewan, B.Eng Computer Engineering</h3>
                 <p class="dates">Sept 2018 - April 2023</p>
                 <ul>
-                    <li>Graduated with great distinction. Focus in Digital Systems and Software</li>
+                    <li>Graduated with great distinction. Focus in Digital Systems and Software.</li>
                     <li>Awards for academic achievement:
                         Douglas Durie Memorial Scholarship Fall 2020, Fall 2023 ● Agra Memorial Scholarship Fall 2020 ●
                         Slapkauskas Scholarship in Engineering Winter 2021 ● Dean’s Honour Roll 2019, 2020, 2021, 2023.
