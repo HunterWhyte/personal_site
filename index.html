@@ -30,7 +30,6 @@
             padding: 15px;
             border-radius: 7px;
             box-shadow: 4px 4px 4px 4px rgba(255, 40, 40, 0.05);
-            /* Softer shadow for depth */
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
@@ -38,9 +37,7 @@
             background-color: hsl(250, 0%, 100%);
             transform: translateY(-3px);
             transform: translateX(-5px);
-            /* Less movement on hover for subtlety */
             box-shadow: 0px 1px 3px 3px hsla(135, 40%, 75%, 0.5);
-            /* Slightly deeper shadow on hover */
         }
 
         .profile img {
@@ -58,7 +55,6 @@
         .project img {
             height: auto;
             width: 25%;
-            /* Slightly smaller images for balance */
             margin-left: 5px;
             border-radius: 5px;
         }
@@ -70,7 +66,6 @@
         .project video {
             height: auto;
             width: 25%;
-            /* Slightly smaller images for balance */
             margin-left: 5px;
             border-radius: 5px;
         }
@@ -82,58 +77,45 @@
         .project-header {
             font-size: 20px;
             font-weight: 600;
-            color: hsl(90, 85%, 15%);
-            /* A pop of contrasting blue */
+            color: hsl(90, 100%, 7%);
             margin-bottom: 5px;
-            /* Tighter spacing */
         }
 
         .project-summary {
             font-size: 16px;
             color: #333333;
-            /* Darker grey for readability */
         }
 
         .project-date {
             font-size: 14px;
             color: #555555;
-            /* Medium grey */
             margin-top: 10px;
-            /* Defined spacing */
         }
 
         .project-link {
             text-decoration: none;
-            /* Removes underline from links */
             color: inherit;
-            /* Inherits the text color from parent elements */
             display: block;
-            /* Makes the link behave like a block, allowing it to contain the .project div */
         }
 
         .split-container {
             display: flex;
-            /* Enables flexbox layout */
             justify-content: space-between;
-            /* Spaces the two columns apart */
+
         }
 
         .left-column {
             flex-basis: 40%;
-            /* Each column takes up half the width of the main content area */
             padding: 5px;
-            /* Adds some padding around the content of each column */
             justify-content: left;
             text-align: left;
         }
 
         .right-column {
             flex-basis: 60%;
-            /* Each column takes up half the width of the main content area */
             padding: 10px;
             margin-left: 50px;
             margin-top: 10px;
-            /* Adds some padding around the content of each column */
         }
 
         .contact-info {
@@ -141,12 +123,9 @@
             display: flex;
             align-items: left;
             justify-content: left;
-            /* Aligns items vertically in the center */
             vertical-align: middle;
-            /* Aligns the image in the middle of the text line */
             font-size: 1em;
             color: #3d3c3c;
-            /* Date text color, adjust as needed */
             margin-top: 0px;
             margin-left: 0px;
             margin-bottom: 5px;
@@ -161,36 +140,28 @@
 
         .contact-info img {
             height: 15px;
-            /* Slightly smaller images for balance */
             width: auto;
             border-radius: 0px;
             border-radius: 0px;
             vertical-align: middle;
             margin-right: 3px;
-            /* Aligns the image in the middle of the text line */
         }
 
-        /* Layout for landscape orientation (wider than tall) */
         @media (max-aspect-ratio: 3/4) {
             .split-container {
                 flex-direction: column;
-                /* Lay children out horizontally */
             }
 
             .left-column {
                 flex: 1;
-                /* Make boxes flexible in width */
                 margin: 0 10px;
-                /* Adjust margins for horizontal layout */
                 justify-content: center;
                 text-align: center;
             }
 
             .right-column {
                 flex: 1;
-                /* Make boxes flexible in width */
                 margin: 0 10px;
-                /* Adjust margins for horizontal layout */
             }
 
             .contact-info {
@@ -201,41 +172,35 @@
 
         .card {
             background-color: hsl(250, 10%, 97.5%);
-            /* Matches project card background */
             border-radius: 7px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            /* Matches project card shadow */
             margin-bottom: 20px;
             padding: 20px;
         }
 
         .card:last-child {
             margin-bottom: 0px;
-            /* Removes bottom margin from the last card */
         }
 
         h2 {
-            color: hsl(90, 75%, 15%);
+            color: hsl(90, 100%, 7%);
             font-weight: 700;
             font-size: 1.75em;
-            /* Header color, adjust as needed */
             margin-top: 0px;
             margin-bottom: 0px;
             margin-left: 15px;
         }
 
         h3 {
-            color: hsl(90, 75%, 15%);
+            color: hsl(90, 100%, 7%);
             font-size: 1.1em;
             font-weight: 700;
-            /* Sub-header color, adjust as needed */
             margin-bottom: 0px;
         }
 
         .dates {
             font-size: 1em;
             color: #555;
-            /* Date text color, adjust as needed */
             margin-top: 0px;
             margin-bottom: 5px;
         }
@@ -243,7 +208,6 @@
         .subheading {
             font-size: 1em;
             color: #3d3c3c;
-            /* Date text color, adjust as needed */
             margin-top: 0px;
             margin-left: 0px;
             margin-bottom: 5px;
@@ -271,37 +235,27 @@
                 </div>
                 <div class="contact">
                     <p></p>
-                    <!-- Email Icon -->
                     <a href="mailto:huntergwhyte@gmail.com" title="Email" class="contact-info">
                         <img src="mail.svg" alt="email">
                         huntergwhyte@gmail.com
                     </a>
-
-                    <!-- GitHub Icon -->
                     <a href="https://github.com/hunterwhyte" title="GitHub" class="contact-info">
                         <img src="github-mark.svg" alt="github">
                         github.com/hunterwhyte
                     </a>
-
-                    <!-- LinkedIn Icon -->
                     <a href="https://www.linkedin.com/in/hunter-whyte-995447161/" title="LinkedIn"
                         class="contact-info">
                         <img src="linkedin.svg" alt="linkedin">
                         hunterwhyte
                     </a>
-
-                    <!-- Resume Icon -->
                     <a href="pathtoresume" title="resume" class="contact-info">
                         <img src="resume.svg" alt="resume">
                         resume
                     </a>
                 </div>
-                <!-- Additional education entries -->
             </section>
 
-            <!-- Work Experience Section -->
             <section class="right-column">
-
                 <h3>NerveX Neurotech, Embedded Software Developer</h3>
                 <p class="dates">Nov 2023 - Present</p>
                 <ul>
@@ -309,7 +263,6 @@
                     <li>python scripting and testing frameworks</li>
                     <li>edge bio signal processing</li>
                     <li>PCB layout and SMT assembly</li>
-                    <!-- Additional items -->
                 </ul>
                 <h3>Garmin, Embedded SWE Intern</h3>
                 <p class="dates">Sept 2021 - Aug 2022</p>
@@ -317,14 +270,12 @@
                     <li>embedded C/C++ firmware</li>
                     <li>BLE, WiFi, BTC, and ANT</li>
                     <li>hardware debugging w/ spectrum analyzer, oscilloscopes, logic analyzers</li>
-                    <!-- Additional items -->
                 </ul>
                 <h3>CNH Industrial, Embedded SWE Intern</h3>
                 <p class="dates">May 2021 - Aug 2021</p>
                 <ul>
                     <li>embedded C firmware for agricultural equipment</li>
                     <li>graphical desktop applications with C# and WinForms.</li>
-                    <!-- Additional items -->
                 </ul>
                 <h3>University of Saskatchewan, B.Eng Computer Engineering</h3>
                 <p class="dates">Sept 2018 - April 2023</p>
@@ -334,9 +285,7 @@
                         Douglas Durie Memorial Scholarship Fall 2020, Fall 2023 ● Agra Memorial Scholarship Fall 2020 ●
                         Slapkauskas Scholarship in Engineering Winter 2021 ● Dean’s Honour Roll 2019, 2020, 2021, 2023.
                     </li>
-                    <!-- Additional items -->
                 </ul>
-                <!-- Additional work entries -->
             </section>
         </div>
     </div>
@@ -382,7 +331,6 @@
                         understanding of the project and its objectives.</p>
                     <p class="project-date">Project Date</p>
                 </div>
-                <!-- <img src="javajoom.png" alt="Joom"> -->
             </div>
         </a>
         <a href="link/to/full/project" class="project-link">
