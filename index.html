@@ -4,44 +4,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hunter Whyte | Home</title>
+    <title>Hunter Whyte</title>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Nunito', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f3f0e2;
-            /* Light grey background */
-        }
-
-        header {
-            padding: 20px 40px;
-            text-align: left;
-            background: linear-gradient(to right, #8a9a5b, #606c38);
-            /* Subtle gradient in header */
-            color: #ffffff;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        header h1 {
-            margin: 0;
-            font-size: 24px;
-            font-weight: 700;
-            /* Bold font for the header */
-        }
-
         nav ul {
             list-style-type: none;
+            display: flex;
             margin: 0;
             padding: 0;
             overflow: hidden;
-            background-color: #606c38;
-            /* Darker earth tone for contrast */
         }
 
         nav ul li {
             float: left;
+            padding: 0 0px;
         }
 
         nav ul li a {
@@ -55,22 +31,21 @@
 
         nav ul li a:hover,
         nav ul li a:focus {
-            background-color: #283618;
+            background-color: #455831;
             /* Even darker for hover effect */
             color: #e4e4e4;
-            /* Lighter color on hover for contrast */
         }
 
         .container {
-            padding: 20px;
+            padding: 2px;
         }
 
         .project {
             display: flex;
             align-items: center;
             background-color: #ffffff;
-            margin-bottom: 20px;
-            padding: 20px;
+            margin-bottom: 15px;
+            padding: 10px;
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             /* Softer shadow for depth */
@@ -84,10 +59,21 @@
             /* Slightly deeper shadow on hover */
         }
 
-        .project img {
-            width: 180px;
-            /* Slightly smaller images for balance */
+        .profile img {
+            width: 300px;
             height: auto;
+            margin-left: 0px;
+            margin-top: 10px;
+            margin-bottom: 7.5px;
+            border-radius: 5px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .project img {
+            height: 100px;
+            width: auto;
+            /* Slightly smaller images for balance */
             margin-left: 20px;
             border-radius: 5px;
         }
@@ -98,7 +84,7 @@
 
         .project-header {
             font-size: 20px;
-            color: #3d5a80;
+            color: #5a1a1a;
             /* A pop of contrasting blue */
             margin-bottom: 5px;
             /* Tighter spacing */
@@ -119,65 +105,303 @@
         }
 
         .project-link {
-            text-decoration: none; /* Removes underline from links */
-            color: inherit; /* Inherits the text color from parent elements */
-            display: block; /* Makes the link behave like a block, allowing it to contain the .project div */
-        }
-        
-        .project-link:hover .project {
-            transform: translateY(-3px); /* Maintains the hover effect */
-            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); /* Enhances the shadow on hover for depth */
+            text-decoration: none;
+            /* Removes underline from links */
+            color: inherit;
+            /* Inherits the text color from parent elements */
+            display: block;
+            /* Makes the link behave like a block, allowing it to contain the .project div */
         }
 
-        footer {
-            background: #606c38;
-            color: #fff;
-            text-align: center;
-            padding: 10px 20px;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            border-top-left-radius: 10px;
-            border-top-right-radius: 10px;
-            box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+        .project-link:hover .project {
+            transform: translateY(-4px);
+            /* Maintains the hover effect */
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.5);
+            /* Enhances the shadow on hover for depth */
+        }
+
+        .split-container {
+            display: flex;
+            /* Enables flexbox layout */
+            justify-content: space-between;
+            /* Spaces the two columns apart */
+        }
+
+        .left-column {
+            flex-basis: 40%;
+            /* Each column takes up half the width of the main content area */
+            padding: 5px;
+            /* Adds some padding around the content of each column */
+            justify-content: center;
+            text-align: left;
+        }
+
+        .right-column {
+            flex-basis: 60%;
+            /* Each column takes up half the width of the main content area */
+            padding: 10px;
+            margin-left: 50px;
+            margin-top: 10px;
+            /* Adds some padding around the content of each column */
+        }
+
+        .card {
+            background-color: #ffffff;
+            /* Matches project card background */
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            /* Matches project card shadow */
+            margin-bottom: 20px;
+            padding: 20px;
+        }
+
+        .card:last-child {
+            margin-bottom: 0px;
+            /* Removes bottom margin from the last card */
+        }
+
+        h2 {
+            color: #443b00;
+            /* Header color, adjust as needed */
+            margin-top: 0px;
+            margin-bottom: 0px;
+            margin-left: 15px;
+        }
+
+        h3 {
+            color: #606c38;
+            font-size: 1em;
+            /* Sub-header color, adjust as needed */
+            margin-bottom: 0px;
+        }
+
+        .dates {
+            font-size: 0.9em;
+            color: #555;
+            /* Date text color, adjust as needed */
+            margin-top: 0px;
+            margin-bottom: 5px;
+        }
+
+        .subheading {
+            font-size: 0.9em;
+            color: #3d3c3c;
+            /* Date text color, adjust as needed */
+            margin-top: 0px;
+            margin-left: 15px;
+            margin-bottom: 5px;
+        }
+
+
+        ul {
+            list-style-type: disc;
+            margin-top: 0px;
+            font-size: 0.8em;
+            padding-left: 20px;
+        }
+
+        body {
+            font-family: Helvetica, sans-serif;
+            margin: auto;
+            padding: 15px;
+            max-width: 900px;
+            font-size: 16px;
+            text-align: left;
+            background-color: #e7e6cd;
+            position: relative;
+        }
+
+        .link-with-image {
+            text-decoration: none;
+            /* Sets the color of the text */
+            display: flex;
+            /* Uses flexbox for alignment */
+            align-items: center;
+            /* Aligns items vertically in the center */
+            vertical-align: middle;
+            /* Aligns the image in the middle of the text line */
+            font-size: 0.9em;
+            color: #3d3c3c;
+            /* Date text color, adjust as needed */
+            margin-top: 0px;
+            margin-left: 15px;
+            margin-bottom: 5px;
+        }
+
+        .link-with-image:hover {
+            color: #5a1a1a;
+            text-decoration: underline;
+            transform: translateX(5px);
+        }
+
+        .link-with-image img {
+            height: 15px;
+            /* Slightly smaller images for balance */
+            width: auto;
+            border-radius: 0px;
+            border-radius: 0px;
+            vertical-align: middle;
+            margin-right: 3px;
+            /* Aligns the image in the middle of the text line */
         }
     </style>
 </head>
 
 <body>
+    <div class="card">
+        <div class="split-container">
+            <section class="left-column">
+                <div class="profile">
+                    <h2>Hunter Whyte</h2>
+                    <img src="cropped.jpg" alt="me">
+                    <p class="subheading">Software Developer | Embedded Systems</p>
+                    <p class="subheading">Saskatoon, SK | Toronto, ON</p>
+                </div>
+                <div class="contact">
+                    <p></p>
+                    <!-- Email Icon -->
+                    <a href="mailto:huntergwhyte@gmail.com" title="Email" class="link-with-image">
+                        <img src="mail.svg" alt="email">
+                        huntergwhyte@gmail.com
+                    </a>
 
-    <header>
-        <h1>Hunter Whyte</h1>
-    </header>
+                    <!-- GitHub Icon -->
+                    <a href="https://github.com/hunterwhyte" title="GitHub" class="link-with-image">
+                        <img src="github-mark.svg" alt="github">
+                        github.com/hunterwhyte
+                    </a>
 
-    <nav>
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="portfolio.html">Portfolio</a></li>
-            <li><a href="contact.html">Contact</a></li>
-        </ul>
-    </nav>
+                    <!-- LinkedIn Icon -->
+                    <a href="https://www.linkedin.com/in/hunter-whyte-995447161/" title="LinkedIn"
+                        class="link-with-image">
+                        <img src="linkedin.svg" alt="linkedin">
+                        hunterwhyte
+                    </a>
+
+                    <!-- Resume Icon -->
+                    <a href="pathtoresume" title="resume" class="link-with-image">
+                        <img src="resume.svg" alt="resume">
+                        resume
+                    </a>
+                </div>
+                <!-- Additional education entries -->
+            </section>
+
+            <!-- Work Experience Section -->
+            <section class="right-column">
+
+                <h3>NerveX Neurotech, Embedded Software Developer</h3>
+                <p class="dates">Nov 2023 - Present</p>
+                <ul>
+                    <li>embedded C firmware for low-power wireless devices</li>
+                    <li>python scripting and testing frameworks</li>
+                    <li>edge bio signal processing</li>
+                    <li>PCB layout and SMT assembly</li>
+                    <!-- Additional items -->
+                </ul>
+                <h3>Garmin, Embedded SWE Intern</h3>
+                <p class="dates">Sept 2021 - Aug 2022</p>
+                <ul>
+                    <li>embedded C/C++ firmware</li>
+                    <li>BLE, WiFi, BTC, and ANT</li>
+                    <li>hardware debugging w/ spectrum analyzer, oscilloscopes, logic analyzers</li>
+                    <!-- Additional items -->
+                </ul>
+                <h3>CNH Industrial, Embedded SWE Intern</h3>
+                <p class="dates">May 2021 - Aug 2021</p>
+                <ul>
+                    <li>embedded C firmware for agricultural equipment</li>
+                    <li>graphical desktop applications with C# and WinForms.</li>
+                    <!-- Additional items -->
+                </ul>
+                <h3>University of Saskatchewan, B.Eng Computer Engineering</h3>
+                <p class="dates">Sept 2018 - April 2023</p>
+                <ul>
+                    <li>Graduated with great distinction. Focus in Digital Systems and Software</li>
+                    <li>Awards for academic achievement:
+                        Douglas Durie Memorial Scholarship Fall 2020, Fall 2023 ● Agra Memorial Scholarship Fall 2020 ●
+                        Slapkauskas Scholarship in Engineering Winter 2021 ● Dean’s Honour Roll 2019, 2020, 2021, 2023.
+                    </li>
+                    <!-- Additional items -->
+                </ul>
+                <!-- Additional work entries -->
+            </section>
+        </div>
+    </div>
+
 
     <div class="container">
-        <!-- Each project card is wrapped in an <a> tag -->
         <a href="link/to/full/project" class="project-link">
             <div class="project">
                 <div class="project-content">
-                    <p class="project-header">Project Title</p>
-                    <p class="project-summary">Brief summary of the project. This section should give the reader a quick
+                    <p class="project-header">Wireless LED Bracelet</p>
+                    <p class="project-summary">Brief summary of the project. This section should give the
+                        reader
+                        a
+                        quick
                         understanding of the project and its objectives.</p>
                     <p class="project-date">Project Date</p>
                 </div>
-                <img src="path/to/your/project-image.jpg" alt="Project Image">
+                <img src="bracelet.png" alt="Joom">
             </div>
         </a>
-        <!-- Repeat the above block for each project or blog post -->
+        <a href="link/to/full/project" class="project-link">
+            <div class="project">
+                <div class="project-content">
+                    <p class="project-header">Cross Platform Audio Visualization Library</p>
+                    <p class="project-summary">Brief summary of the project. This section should give the
+                        reader
+                        a
+                        quick
+                        understanding of the project and its objectives.</p>
+                    <p class="project-date">Project Date</p>
+                </div>
+                <!-- <img src="javajoom.png" alt="Joom"> -->
+            </div>
+        </a>
+        <a href="link/to/full/project" class="project-link">
+            <div class="project">
+                <div class="project-content">
+                    <p class="project-header">ARM Cortex A8 Bootloader</p>
+                    <p class="project-summary">Brief summary of the project. This section should give the
+                        reader
+                        a
+                        quick
+                        understanding of the project and its objectives.</p>
+                    <p class="project-date">Project Date</p>
+                </div>
+                <!-- <img src="javajoom.png" alt="Joom"> -->
+            </div>
+        </a>
+        <a href="link/to/full/project" class="project-link">
+            <div class="project">
+                <div class="project-content">
+                    <p class="project-header">Block Puzzle Game</p>
+                    <p class="project-summary">Brief summary of the project. This section should give the
+                        reader
+                        a
+                        quick
+                        understanding of the project and its objectives.</p>
+                    <p class="project-date">Project Date</p>
+                </div>
+                <img src="javajoom.png" alt="Joom">
+            </div>
+        </a>
+        <a href="link/to/full/project" class="project-link">
+            <div class="project">
+                <div class="project-content">
+                    <p class="project-header">Rocket Telemetry</p>
+                    <p class="project-summary">Brief summary of the project. This section should give the
+                        reader
+                        a
+                        quick
+                        understanding of the project and its objectives.</p>
+                    <p class="project-date">Project Date</p>
+                </div>
+            </div>
+        </a>
     </div>
 
-    <footer>
-        <p>&copy; 2024 Hunter Whyte. All rights reserved.</p>
-    </footer>
 
 </body>
 
