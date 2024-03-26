@@ -13,7 +13,7 @@
             max-width: 900px;
             font-size: 16px;
             text-align: left;
-            background-color: hsl(340, 10%, 10%);
+            background-color: hsl(100, 10%, 10%);
             position: relative;
         }
 
@@ -37,18 +37,6 @@
             transform: translateY(-3px);
             transform: translateX(-5px);
             box-shadow: 0px 1px 3px 3px hsla(135, 40%, 75%, 0.5);
-        }
-
-        .profile img {
-            width: 100%;
-            height: auto;
-            max-width: 250px;
-            margin-left: 0px;
-            margin-top: 10px;
-            margin-bottom: 7.5px;
-            border-radius: 5px;
-            border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
         }
 
         .project img {
@@ -103,25 +91,11 @@
 
         }
 
-        .left-column {
-            flex-basis: 40%;
-            padding: 5px;
-            justify-content: left;
-            text-align: left;
-        }
-
-        .right-column {
-            flex-basis: 60%;
-            padding: 10px;
-            margin-left: 50px;
-            margin-top: 10px;
-        }
-
         .contact-info {
+            display: inline-block;
             text-decoration: none;
-            display: flex;
-            align-items: left;
-            justify-content: left;
+            align-items: center;
+            justify-content: center;
             vertical-align: middle;
             font-size: 1em;
             color: #3d3c3c;
@@ -146,35 +120,16 @@
             margin-right: 3px;
         }
 
-        @media (max-aspect-ratio: 3/4) {
-            .split-container {
-                flex-direction: column;
-            }
-
-            .left-column {
-                flex: 1;
-                margin: 0 10px;
-                justify-content: center;
-                text-align: center;
-            }
-
-            .right-column {
-                flex: 1;
-                margin: 0 10px;
-            }
-
-            .contact-info {
-                align-items: center;
-                justify-content: center;
-            }
-        }
-
         .card {
             background-color: hsl(250, 10%, 97.5%);
             border-radius: 7px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
             margin-bottom: 20px;
             padding: 20px;
+            align-items: middle;
+            justify-content: center;
+            vertical-align: middle;
+            text-align: center;
         }
 
         .card:last-child {
@@ -185,7 +140,7 @@
             color: hsl(90, 100%, 7%);
             font-weight: 700;
             font-size: 1.75em;
-            margin-top: 0px;
+            margin-top: 10px;
             margin-bottom: 0px;
             margin-left: 15px;
         }
@@ -207,7 +162,7 @@
         .subheading {
             font-size: 1em;
             color: #3d3c3c;
-            margin-top: 0px;
+            margin-top: 10px;
             margin-left: 0px;
             margin-bottom: 5px;
         }
@@ -219,88 +174,98 @@
             font-size: 1em;
             padding-left: 20px;
         }
+
+        .expanded {
+            min-height: 1000px;
+            /* Adjust based on content */
+        }
     </style>
 </head>
+<button id="projectsButton">Projects</button>
 
 <body>
-    <div class="card">
-        <div class="split-container">
-            <section class="left-column">
-                <div class="profile">
-                    <h2>Hunter Whyte</h2>
-                    <img src="cropped.jpg" alt="me">
-                    <p class="subheading">Software Developer | Embedded Systems</p>
-                    <p class="subheading">Saskatoon, SK | Toronto, ON</p>
-                </div>
-                <div class="contact">
-                    <p></p>
-                    <a href="mailto:huntergwhyte@gmail.com" title="Email" class="contact-info">
-                        <img src="mail.svg" alt="email">
-                        huntergwhyte@gmail.com
-                    </a>
-                    <a href="https://github.com/hunterwhyte" title="GitHub" class="contact-info">
-                        <img src="github-mark.svg" alt="github">
-                        github.com/hunterwhyte
-                    </a>
-                    <a href="https://www.linkedin.com/in/hunter-whyte-995447161/" title="LinkedIn"
-                        class="contact-info">
-                        <img src="linkedin.svg" alt="linkedin">
-                        hunterwhyte
-                    </a>
-                    <a href="pathtoresume" title="resume" class="contact-info">
-                        <img src="resume.svg" alt="resume">
-                        resume
-                    </a>
-                </div>
-            </section>
-
-            <section class="right-column">
-                <h3>NerveX Neurotech, Embedded Software Developer</h3>
-                <p class="dates">Nov 2023 - Present</p>
-                <ul>
-                    <li>embedded C firmware for low-power wireless devices</li>
-                    <li>python scripting and testing frameworks</li>
-                    <li>edge bio signal processing</li>
-                    <li>PCB layout and SMT assembly</li>
-                </ul>
-                <h3>Garmin, Embedded SWE Intern</h3>
-                <p class="dates">Sept 2021 - Aug 2022</p>
-                <ul>
-                    <li>embedded C/C++ firmware</li>
-                    <li>BLE, WiFi, BTC, and ANT</li>
-                    <li>hardware debugging w/ spectrum analyzer, oscilloscopes, logic analyzers</li>
-                </ul>
-                <h3>CNH Industrial, Embedded SWE Intern</h3>
-                <p class="dates">May 2021 - Aug 2021</p>
-                <ul>
-                    <li>embedded C firmware for agricultural equipment</li>
-                    <li>graphical desktop applications with C# and WinForms.</li>
-                </ul>
-                <h3>University of Saskatchewan, B.Eng Computer Engineering</h3>
-                <p class="dates">Sept 2018 - April 2023</p>
-                <ul>
-                    <li>Graduated with great distinction. Focus in Digital Systems and Software.</li>
-                    <li>Awards for academic achievement:
-                        Douglas Durie Memorial Scholarship Fall 2020, Fall 2023 | Agra Memorial Scholarship Fall 2020 |
-                        Slapkauskas Scholarship in Engineering Winter 2021 | Dean's Honour Roll 2019, 2020, 2021, 2023.
-                    </li>
-                </ul>
-            </section>
+    <script src="index.js"></script>
+    <div class="card" id="projectsContainer">
+        <div class="profile">
+            <h2>Hunter Whyte</h2>
+            <p class="subheading">Software Developer | Embedded Systems</p>
+            <p class="subheading">Saskatoon, SK | Toronto, ON</p>
+        </div>
+        <div class="contact">
+            <p>
+            </p>
+            <a href="mailto:huntergwhyte@gmail.com" title="Email" class="contact-info">
+                <img src="mail.svg" alt="email">
+                huntergwhyte@gmail.com
+            </a>
+        </div>
+        <div class="contact">
+            <a href="https://github.com/hunterwhyte" title="GitHub" class="contact-info">
+                <img src="github-mark.svg" alt="github">
+                github.com/hunterwhyte
+            </a>
+        </div>
+        <div class="contact">
+            <a href="https://www.linkedin.com/in/hunter-whyte-995447161/" title="LinkedIn" class="contact-info">
+                <img src="linkedin.svg" alt="linkedin">
+                hunterwhyte
+            </a>
+        </div>
+        <div class="contact">
+            <a href="pathtoresume" title="resume" class="contact-info">
+                <img src="resume.svg" alt="resume">
+                resume
+            </a>
         </div>
     </div>
 
+    <div class="container">
+        <h3>NerveX Neurotech, Embedded Software Developer</h3>
+        <p class="dates">Nov 2023 - Present</p>
+        <ul>
+            <li>embedded C firmware for low-power wireless devices</li>
+            <li>python scripting and testing frameworks</li>
+            <li>edge bio signal processing</li>
+            <li>PCB layout and SMT assembly</li>
+        </ul>
+        <h3>Garmin, Embedded SWE Intern</h3>
+        <p class="dates">Sept 2021 - Aug 2022</p>
+        <ul>
+            <li>embedded C/C++ firmware</li>
+            <li>BLE, WiFi, BTC, and ANT</li>
+            <li>hardware debugging w/ spectrum analyzer, oscilloscopes, logic analyzers</li>
+        </ul>
+        <h3>CNH Industrial, Embedded SWE Intern</h3>
+        <p class="dates">May 2021 - Aug 2021</p>
+        <ul>
+            <li>embedded C firmware for agricultural equipment</li>
+            <li>graphical desktop applications with C# and WinForms.</li>
+        </ul>
+        <h3>University of Saskatchewan, B.Eng Computer Engineering</h3>
+        <p class="dates">Sept 2018 - April 2023</p>
+        <ul>
+            <li>Graduated with great distinction. Focus in Digital Systems and Software.</li>
+            <li>Awards for academic achievement:
+                Douglas Durie Memorial Scholarship Fall 2020, Fall 2023 | Agra Memorial Scholarship Fall 2020 |
+                Slapkauskas Scholarship in Engineering Winter 2021 | Dean's Honour Roll 2019, 2020, 2021, 2023.
+            </li>
+        </ul>
+    </div>
 
     <div class="container">
         <a href="link/to/full/project" class="project-link">
             <div class="project">
                 <div class="project-content">
                     <p class="project-header">Wireless LED Bracelet</p>
-                    <p class="project-summary">Brief summary of the project. This section should give the
-                        reader
-                        a
-                        quick
-                        understanding of the project and its objectives.</p>
-                    <p class="project-date">Project Date</p>
+                    <p class="project-summary">Wirelessly controlled light-up bracelet for use at concerts and live
+                        events.
+                    </p>
+                    <ul>
+                        <li>2.4GHz and connects over BLE to smartphones.</li>
+                        <li>Designed circuit and PCB around nRF52 SoC. Assembled and debugged form factor prototype.
+                        </li>
+                    </ul>
+                    <p class="project-date">March 2023</p>
                 </div>
                 <img src="bracelet.png" alt="Joom">
             </div>
