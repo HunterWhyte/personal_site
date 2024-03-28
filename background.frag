@@ -12,123 +12,56 @@ uniform float u_time;
 #define iResolution u_resolution
 #define fragColor gl_FragColor
 
-#define TWO_PI 6.283185
-
-vec3 hsb2rgb(vec3 c){
-    vec3 rgb = clamp(abs(mod(c.x*6.0+vec3(0.0,4.0,2.0),
-                             6.0)-3.0)-1.0,
-                     0.0,
-                     1.0 );
-    rgb = rgb*rgb*(3.0-2.0*rgb);
-    return c.z * mix(vec3(1.0), rgb, c.y);
+float hash21(vec2 x) {
+    return fract(cos(mod(dot(x, vec2(13.9898, 8.141)), 3.14)) * 43758.5453);
 }
 
+vec2 hash22(vec2 uv) {
+    uv = vec2(dot(uv, vec2(127.1,311.7)),
+              dot(uv, vec2(269.5,183.3)));
+    return 2.0 * fract(sin(uv) * 43758.5453123) - 1.0;
+}
 
-vec2 hash22(vec2 p)
+float perlinNoise(vec2 uv)
 {
-    p = p*mat2(127.1,311.7,269.5,183.3);
-	p = -1.0 + 2.0 * fract(sin(p)*43758.5453123);
-	return sin(p*6.283 + iTime);
+    vec2 iuv = floor(uv);
+    vec2 fuv = fract(uv);
+    vec2 blur = smoothstep(.0, 1., fuv);
+    vec2 bl = vec2(.0, .0);
+    vec2 br = vec2(1., .0);
+    vec2 tl = vec2(.0, 1.);
+    vec2 tr = vec2(1., 1.);
+    vec2 bln = hash22(iuv + bl);
+    vec2 brn = hash22(iuv + br);
+    vec2 tln = hash22(iuv + tl);
+    vec2 trn = hash22(iuv + tr);
+    float b  = mix(dot(bln, fuv - bl), dot(brn, fuv - br), blur.x);
+    float t  = mix(dot(tln, fuv - tl), dot(trn, fuv - tr), blur.x);
+    float c = mix(b, t, blur.y);
+    return c;
 }
 
-float perlin_noise(vec2 p)
+float fbm(vec2 uv)
 {
-	vec2 pi = floor(p);
-    vec2 pf = p-pi;
-
-    vec2 w = pf*pf*(3.-2.*pf);
-
-    float f00 = dot(hash22(pi+vec2(.0,.0)),pf-vec2(.0,.0));
-    float f01 = dot(hash22(pi+vec2(.0,1.)),pf-vec2(.0,1.));
-    float f10 = dot(hash22(pi+vec2(1.0,0.)),pf-vec2(1.0,0.));
-    float f11 = dot(hash22(pi+vec2(1.0,1.)),pf-vec2(1.0,1.));
-
-    float xm1 = mix(f00,f10,w.x);
-    float xm2 = mix(f01,f11,w.x);
-
-    float ym = mix(xm1,xm2,w.y);
-    return ym;
-
-}
-
-float noise_sum(vec2 p){
-    p *= 4.;
-	float a = 1., r = 0., s=0.;
-
-    for (int i=0; i<5; i++) {
-      r += a*perlin_noise(p); s+= a; p *= 2.; a*=.5;
+    float value = .0;
+    float ampitude  = .5;
+    float freq = 2.;
+    for(int i = 0; i < 20; i++)
+    {
+        value += perlinNoise(uv) * ampitude;
+        uv *= freq;
+        ampitude *= .5;
     }
-
-    return r/s;
+    return value;
 }
 
-float noise(vec2 p){
-    return noise_sum(p);
-}
-
-float circle(vec2 uv, vec2 center, float size, float blur){
-    float dist = distance(uv, center);
-    float mask = smoothstep(size+blur, size-blur, dist);
-    return mask;
-}
-
-mat2 rotate(float angle){
-    return mat2(cos(angle), -sin(angle), sin(angle), cos(angle));
-}
 
 void main()
 {
-    vec2 uv = fragCoord.xy / iResolution.xy; // 0 <> 1
-    uv.y = 1. - uv.y;
-
-    float level = 1.;
-    float t = iTime*2.;
-    uv.y -= 1.;
-    uv.x *= -1.;
-    uv.x *= iResolution.x/iResolution.y;
-    // vec3 h = hsb2rgb(vec3(0.8+sin(t*0.1)*0.25,1.,1.));
-    vec3 h = hsb2rgb(vec3(1.*0.2 + sin(u_time)*0.035,1.,1.));
-
-    vec2 p = vec2(1., 0.35  - 1.); // pos of circle+ sin(t*0.1)*0.04
-    float size = 0.2 + 0.025*level;// size of circle
-    vec3 color = vec3(0);
-
-    float f = noise(uv+vec2((0), (t*0.05))); // -1 <> 1
-    f = f*0.5+0.5; // 0 <> 1
-
-    // light from orb
-    float l = 1. - 1./distance(uv, p)*distance(uv, p)*distance(uv, p);
-    l = clamp(l, 0., 1.);
-    l *= l*l*l*(1. + (sin(t*0.5)*0.25));
-    color += vec3(l*0.5);
-
-    float star = fract(f*50.) > 0.925 ? 0.2 : 0.;
-    star *= 0.5 + (uv.y + 0.5)*(uv.y + 0.5)*0.5;
-    star *= 0.75 + level*0.5;
-    color += star;
-    color = color*h;
-
-    vec2 pos = vec2(p)-uv;
-    float r = length(pos)*2.0;
-    float angle = 1.5725 + cos(r*10. + t)*(sin(t*0.1)*0.05); // modulate angle by radius for wavy beams
-    pos *= rotate(angle);
-    float a = atan(pos.y, pos.x);// + TWO_PI/2.;
-    // outer ring glow
-    // map symmetrically onto circle
-    float a2 = abs(a*1.3/TWO_PI);
-    float fft = sin(t);
-    float or_g = sin(a*(sin(t*0.05)*0.5 + 1.)*50.)*0.5 + 0.5;
-    or_g *= (fft)*0.4;
-    float outer_ring_mask = circle(uv, p, or_g, 0.25);
-    outer_ring_mask *= smoothstep(-0.2, 0.1, uv.y);
-
-    vec3 or_g_col = mix(h, vec3(1.,0.,5.), or_g*0.05);
-
-    color = mix(color, or_g_col, outer_ring_mask);
-
-    float circle_mask = circle(uv, p, size, 0.004);
-    color = mix(color, vec3(0.), circle_mask);
-
-	fragColor = vec4(color,1.0-circle_mask);
-
+    vec2 uv = (fragCoord - 0.5 * iResolution.xy)/iResolution.y;
+    vec3 col = vec3(.0);
+    uv += fbm(uv + iTime * .5);
+    float dist = abs(uv.x);
+    col = vec3(1.2, .2, .3) * mix(.0, .05, hash21(vec2(iTime))) / dist;
+    fragColor = vec4(col, 1.0);
 }
