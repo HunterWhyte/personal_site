@@ -35,11 +35,11 @@ void main()
     ssuv /= 30.;// + 40.*mousey;
     ssuv.x -= 0.5;
 
-    float size = 0.0015;
+    float size = 0.0001;
     
     // to get desired center point of the dot we just floor the warped dot and then
     // find the screenspace location of that by undoing our previous calculations
-    float f = smoothstep(size + 0.0005, size, distance(screenuv, ssuv));
+    float f = smoothstep(size + 0.0035, size, distance(screenuv, ssuv));
     vec3 col = vec3(fract(ssuv.x), fract(ssuv.y), 1.);
     col = vec3(f);
 
