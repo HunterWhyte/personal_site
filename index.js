@@ -34,6 +34,18 @@ async function initWebGL() {
     // For example, by hiding the canvas or displaying a message
     document.getElementById("background").style.display = 'none';
     document.getElementById("background").style.background = 'black';
+
+    var style = document.createElement('style');
+    style.type = 'text/css';
+    style.innerHTML = `* {
+        -webkit-animation: none !important;
+        -moz-animation: none !important;
+        -ms-animation: none !important;
+        -o-animation: none !important;
+        animation: none !important;
+        transition: none !important;
+    }`;
+    document.head.appendChild(style);
     return;
   }
 
