@@ -116,7 +116,7 @@ void main()
     // outer ring glow
     // map symmetrically onto circle
     float a2 = abs(a*1.3/TWO_PI);
-    float fft =  1.;
+    float fft = sin(t);
     float or_g = sin(a*(sin(t*0.05)*0.5 + 1.)*50.)*0.5 + 0.5;
     or_g *= (fft)*0.4;
     float outer_ring_mask = circle(uv, p, or_g, 0.25);
@@ -126,24 +126,8 @@ void main()
 
     color = mix(color, or_g_col, outer_ring_mask);
 
-    // float t2 = (sin(t*0.1)*0.5 + 0.5);
-
-    // vec3 fog_col = vec3(1. - 0.5*t2, 0.6 - 0.4*t2, 0.4 + 0.2*t2);
-    // fog_col = mix(fog_col, vec3(0.6, 0.2, 0.2), 1.);
-    // // draw beam
-    // float beam_strength = 17.5;
-    // float fog_width = 0.1 + 0.025*level;
-    // float b = clamp(fog_width - abs(uv.y + 0.5)*abs(uv.x*10.), 0.0, 0.5);
-    // b *= beam_strength;
-    // b *= f;
-    //float b_mask = clamp(b*15., 0., 1.);
-    // color = mix(color, fog_col*b, b);
-
     float circle_mask = circle(uv, p, size, 0.004);
     color = mix(color, vec3(0.), circle_mask);
-    // f *= (0.3 - uv.y)*(0.5 - uv.y)*(0.5 - uv.y);
-    // f *= 0.4 + 0.5*level*(abs(uv.x*2.*uv.x*2.));
-    // color += fog_col*f;
 
 	fragColor = vec4(color,1.0-circle_mask);
 

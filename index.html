@@ -47,15 +47,19 @@
             margin-bottom: 15px;
             padding: 15px;
             border-radius: 7px;
-            box-shadow: 4px 4px 4px 4px rgba(255, 40, 40, 0.05);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(2px);
+            -webkit-backdrop-filter: blur(2px);
+            transition: text-shadow 0.3s ease;
+            transition: box-shadow 0.3s ease;
+            /* Add transition to the base state */
         }
 
         .project:hover {
-            background-color: hsl(250, 0%, 100%);
             transform: translateY(-3px);
             transform: translateX(-5px);
-            box-shadow: 0px 1px 3px 3px hsla(135, 40%, 75%, 0.5);
+            box-shadow: 0px 1px 3px 3px hsla(0, 0%, 100%, 0.5);
+            filter: drop-shadow(0px 0px 4px rgba(255, 255, 255, 0.498));
         }
 
         .project img {
@@ -66,7 +70,7 @@
         }
 
         .project:hover img {
-            filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.1));
+            filter: drop-shadow(0px 0px 4px rgba(255, 255, 255, 0.498));
         }
 
         .project video {
@@ -83,18 +87,18 @@
         .project-header {
             font-size: 20px;
             font-weight: 600;
-            color: hsl(90, 100%, 7%);
+            color: white;
             margin-bottom: 5px;
         }
 
         .project-summary {
             font-size: 16px;
-            color: #333333;
+            color: white;
         }
 
         .project-date {
             font-size: 14px;
-            color: #555555;
+            color: white;
             margin-top: 10px;
         }
 
@@ -207,6 +211,51 @@
             min-height: 1000px;
             /* Adjust based on content */
         }
+
+        .button-container {
+            display: flex;
+            /* Use flexbox to lay out buttons side by side */
+            justify-content: center;
+            /* Center the buttons within the div */
+            gap: 10%;
+            /* Add some space between the buttons */
+        }
+
+        .btn {
+            padding: 10px 20px;
+            /* Add some padding around the text */
+            cursor: pointer;
+            /* Change cursor to pointer on hover */
+            background-color: #f0f0f0;
+            /* Light grey background */
+            border: 1px solid #ddd;
+            /* Slightly darker border */
+            border-radius: 5px;
+            /* Rounded corners for the buttons */
+            transition: background-color 0.3s;
+            /* Smooth background color transition on hover */
+        }
+
+        .btn:hover {
+            background-color: #e0e0e0;
+            /* Slightly darker grey on hover */
+        }
+
+        .tab {
+            overflow: hidden;
+            /* Hide content that overflows the container */
+            height: 0;
+            /* Start with 0 height */
+            padding: 0 20px;
+            /* Keep horizontal padding */
+            border-top: none;
+            transition: height 0.5s ease, padding 0.5s ease;
+            /* Animate height and padding changes */
+        }
+
+        .tab-active {
+            padding: 20px; /* Restore padding when the tab is active */
+        }
     </style>
 </head>
 
@@ -247,31 +296,36 @@
                     resume
                 </a>
             </div>
+
+            <div class="button-container">
+                <button class="btn" onclick="openTab('projects')">PROJECTS</button>
+                <button class="btn" onclick="openTab('experience')">EXPERIENCE</button>
+            </div>
         </div>
 
-        <div>
-            <h3>NerveX Neurotech, Embedded Software Developer</h3>
+        <div id="experience" class="tab">
+            <h3>NerveX Neurotech | Embedded Software Developer</h3>
             <p class="dates">Nov 2023 - Present</p>
             <ul>
-                <li>embedded C firmware for low-power wireless devices</li>
+                <li>embedded C firmware for low-power wearables</li>
                 <li>python scripting and testing frameworks</li>
                 <li>edge bio signal processing</li>
                 <li>PCB layout and SMT assembly</li>
             </ul>
-            <h3>Garmin, Embedded SWE Intern</h3>
+            <h3>Garmin | Embedded SWE Intern</h3>
             <p class="dates">Sept 2021 - Aug 2022</p>
             <ul>
                 <li>embedded C/C++ firmware</li>
                 <li>BLE, WiFi, BTC, and ANT</li>
                 <li>hardware debugging w/ spectrum analyzer, oscilloscopes, logic analyzers</li>
             </ul>
-            <h3>CNH Industrial, Embedded SWE Intern</h3>
+            <h3>CNH Industrial | Embedded SWE Intern</h3>
             <p class="dates">May 2021 - Aug 2021</p>
             <ul>
                 <li>embedded C firmware for agricultural equipment</li>
                 <li>graphical desktop applications with C# and WinForms.</li>
             </ul>
-            <h3>University of Saskatchewan, B.Eng Computer Engineering</h3>
+            <h3>University of Saskatchewan | B.Eng Computer Engineering</h3>
             <p class="dates">Sept 2018 - April 2023</p>
             <ul>
                 <li>Graduated with great distinction. Focus in Digital Systems and Software.</li>
@@ -282,7 +336,7 @@
             </ul>
         </div>
 
-        <div class="container">
+        <div id="projects" class="tab">
             <a href="link/to/full/project" class="project-link">
                 <div class="project">
                     <div class="project-content">
