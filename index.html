@@ -6,14 +6,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hunter Whyte</title>
     <style>
-        body {
-            font-family: Helvetica;
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            justify-content: center;
+        }
+
+        canvas {
+            display: block;
+            /* Remove default margin of canvas */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            /* Ensure the canvas stays in the background */
+        }
+
+        .contents {
+            font-family: Georgia;
             margin: auto;
             padding: 15px;
             max-width: 900px;
             font-size: 16px;
             text-align: left;
-            background-color: hsl(100, 10%, 10%);
+            justify-content: center;
             position: relative;
         }
 
@@ -98,7 +117,8 @@
             justify-content: center;
             vertical-align: middle;
             font-size: 1em;
-            color: #3d3c3c;
+            color: white;
+            /* Base color for the text */
             margin-top: 0px;
             margin-left: 0px;
             margin-bottom: 5px;
@@ -106,8 +126,8 @@
         }
 
         .contact-info:hover {
-            color: hsl(0, 100%, 30%);
             text-decoration: underline;
+            text-shadow: 0 0 12px rgba(255, 255, 255, 0.8);
             transform: translateY(-2px);
         }
 
@@ -118,35 +138,41 @@
             border-radius: 0px;
             vertical-align: middle;
             margin-right: 3px;
+            filter: invert()
         }
 
         .card {
-            background-color: hsl(250, 10%, 97.5%);
-            border-radius: 7px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            margin-bottom: 20px;
+            margin-top: 60px;
+            margin-bottom: 60px;
             padding: 20px;
             align-items: middle;
             justify-content: center;
             vertical-align: middle;
             text-align: center;
+            margin: auto;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(2px);
+            -webkit-backdrop-filter: blur(2px);
+            transition: text-shadow 0.3s ease;
+            /* Add transition to the base state */
         }
 
-        .card:last-child {
-            margin-bottom: 0px;
+        .card:hover {
+            text-shadow: 0 0 4px rgba(255, 255, 255, 0.8);
         }
 
         h2 {
-            color: hsl(90, 100%, 7%);
+            color: white;
+            /* Base color for the text */
             font-weight: 700;
             font-size: 1.75em;
             margin-top: 10px;
-            margin-bottom: 0px;
+            margin-bottom: 2ch;
             margin-left: 15px;
         }
 
         h3 {
-            color: hsl(90, 100%, 7%);
+            color: white;
             font-size: 1.1em;
             font-weight: 700;
             margin-bottom: 0px;
@@ -154,14 +180,15 @@
 
         .dates {
             font-size: 1em;
-            color: #555;
+            color: white;
             margin-top: 0px;
             margin-bottom: 5px;
         }
 
         .subheading {
             font-size: 1em;
-            color: #3d3c3c;
+            color: white;
+            /* Base color for the text */
             margin-top: 10px;
             margin-left: 0px;
             margin-bottom: 5px;
@@ -169,6 +196,7 @@
 
 
         ul {
+            color: white;
             list-style-type: disc;
             margin-top: 0px;
             font-size: 1em;
@@ -181,151 +209,153 @@
         }
     </style>
 </head>
-<button id="projectsButton">Projects</button>
 
 <body>
-    <script src="index.js"></script>
-    <div class="card" id="projectsContainer">
-        <div class="profile">
-            <h2>Hunter Whyte</h2>
-            <p class="subheading">Software Developer | Embedded Systems</p>
-            <p class="subheading">Saskatoon, SK | Toronto, ON</p>
+    <canvas id="background"></canvas>
+    <div class="contents">
+        <!-- <button id="projectsButton">Projects</button> -->
+        <script src="index.js"></script>
+        <div class="card" id="projectsContainer" style="max-width: 66%;">
+            <div class="profile">
+                <h2>Hunter Whyte</h2>
+                <p class="subheading">Software Developer | Embedded Systems</p>
+                <p class="subheading">Toronto, ON</p>
+            </div>
+            <div class="contact">
+                <p>
+                </p>
+                <a href="mailto:huntergwhyte@gmail.com" title="Email" class="contact-info">
+                    <img src="mail.svg" alt="email">
+                    huntergwhyte@gmail.com
+                </a>
+            </div>
+            <div class="contact">
+                <a href="https://github.com/hunterwhyte" title="GitHub" class="contact-info">
+                    <img src="github-mark.svg" alt="github">
+                    github.com/hunterwhyte
+                </a>
+            </div>
+            <div class="contact">
+                <a href="https://www.linkedin.com/in/hunter-whyte-995447161/" title="LinkedIn" class="contact-info">
+                    <img src="linkedin.svg" alt="linkedin">
+                    hunterwhyte
+                </a>
+            </div>
+            <div class="contact">
+                <a href="pathtoresume" title="resume" class="contact-info">
+                    <img src="resume.svg" alt="resume">
+                    resume
+                </a>
+            </div>
         </div>
-        <div class="contact">
-            <p>
-            </p>
-            <a href="mailto:huntergwhyte@gmail.com" title="Email" class="contact-info">
-                <img src="mail.svg" alt="email">
-                huntergwhyte@gmail.com
+
+        <div>
+            <h3>NerveX Neurotech, Embedded Software Developer</h3>
+            <p class="dates">Nov 2023 - Present</p>
+            <ul>
+                <li>embedded C firmware for low-power wireless devices</li>
+                <li>python scripting and testing frameworks</li>
+                <li>edge bio signal processing</li>
+                <li>PCB layout and SMT assembly</li>
+            </ul>
+            <h3>Garmin, Embedded SWE Intern</h3>
+            <p class="dates">Sept 2021 - Aug 2022</p>
+            <ul>
+                <li>embedded C/C++ firmware</li>
+                <li>BLE, WiFi, BTC, and ANT</li>
+                <li>hardware debugging w/ spectrum analyzer, oscilloscopes, logic analyzers</li>
+            </ul>
+            <h3>CNH Industrial, Embedded SWE Intern</h3>
+            <p class="dates">May 2021 - Aug 2021</p>
+            <ul>
+                <li>embedded C firmware for agricultural equipment</li>
+                <li>graphical desktop applications with C# and WinForms.</li>
+            </ul>
+            <h3>University of Saskatchewan, B.Eng Computer Engineering</h3>
+            <p class="dates">Sept 2018 - April 2023</p>
+            <ul>
+                <li>Graduated with great distinction. Focus in Digital Systems and Software.</li>
+                <li>Awards for academic achievement:
+                    Douglas Durie Memorial Scholarship Fall 2020, Fall 2023 | Agra Memorial Scholarship Fall 2020 |
+                    Slapkauskas Scholarship in Engineering Winter 2021 | Dean's Honour Roll 2019, 2020, 2021, 2023.
+                </li>
+            </ul>
+        </div>
+
+        <div class="container">
+            <a href="link/to/full/project" class="project-link">
+                <div class="project">
+                    <div class="project-content">
+                        <p class="project-header">Wireless LED Bracelet</p>
+                        <p class="project-summary">Wirelessly controlled light-up bracelet for use at concerts and live
+                            events.
+                        </p>
+                        <ul>
+                            <li>2.4GHz and connects over BLE to smartphones.</li>
+                            <li>Designed circuit and PCB around nRF52 SoC. Assembled and debugged form factor prototype.
+                            </li>
+                        </ul>
+                        <p class="project-date">March 2023</p>
+                    </div>
+                    <img src="bracelet.png" alt="Joom">
+                </div>
             </a>
-        </div>
-        <div class="contact">
-            <a href="https://github.com/hunterwhyte" title="GitHub" class="contact-info">
-                <img src="github-mark.svg" alt="github">
-                github.com/hunterwhyte
+            <a href="link/to/full/project" class="project-link">
+                <div class="project">
+                    <div class="project-content">
+                        <p class="project-header">Cross Platform Audio Visualization Library</p>
+                        <p class="project-summary">Brief summary of the project. This section should give the
+                            reader
+                            a
+                            quick
+                            understanding of the project and its objectives.</p>
+                        <p class="project-date">Project Date</p>
+                    </div>
+                    <video autoplay muted loop src="audiovisdemo.mp4" alt="Joom">
+                </div>
             </a>
-        </div>
-        <div class="contact">
-            <a href="https://www.linkedin.com/in/hunter-whyte-995447161/" title="LinkedIn" class="contact-info">
-                <img src="linkedin.svg" alt="linkedin">
-                hunterwhyte
+            <a href="link/to/full/project" class="project-link">
+                <div class="project">
+                    <div class="project-content">
+                        <p class="project-header">ARM Cortex A8 Bootloader</p>
+                        <p class="project-summary">Brief summary of the project. This section should give the
+                            reader
+                            a
+                            quick
+                            understanding of the project and its objectives.</p>
+                        <p class="project-date">Project Date</p>
+                    </div>
+                </div>
             </a>
-        </div>
-        <div class="contact">
-            <a href="pathtoresume" title="resume" class="contact-info">
-                <img src="resume.svg" alt="resume">
-                resume
+            <a href="link/to/full/project" class="project-link">
+                <div class="project">
+                    <div class="project-content">
+                        <p class="project-header">Block Puzzle Game</p>
+                        <p class="project-summary">Brief summary of the project. This section should give the
+                            reader
+                            a
+                            quick
+                            understanding of the project and its objectives.</p>
+                        <p class="project-date">Project Date</p>
+                    </div>
+                    <img src="javajoom.png" alt="Joom">
+                </div>
+            </a>
+            <a href="link/to/full/project" class="project-link">
+                <div class="project">
+                    <div class="project-content">
+                        <p class="project-header">Rocket Telemetry</p>
+                        <p class="project-summary">Brief summary of the project. This section should give the
+                            reader
+                            a
+                            quick
+                            understanding of the project and its objectives.</p>
+                        <p class="project-date">Project Date</p>
+                    </div>
+                </div>
             </a>
         </div>
     </div>
-
-    <div class="container">
-        <h3>NerveX Neurotech, Embedded Software Developer</h3>
-        <p class="dates">Nov 2023 - Present</p>
-        <ul>
-            <li>embedded C firmware for low-power wireless devices</li>
-            <li>python scripting and testing frameworks</li>
-            <li>edge bio signal processing</li>
-            <li>PCB layout and SMT assembly</li>
-        </ul>
-        <h3>Garmin, Embedded SWE Intern</h3>
-        <p class="dates">Sept 2021 - Aug 2022</p>
-        <ul>
-            <li>embedded C/C++ firmware</li>
-            <li>BLE, WiFi, BTC, and ANT</li>
-            <li>hardware debugging w/ spectrum analyzer, oscilloscopes, logic analyzers</li>
-        </ul>
-        <h3>CNH Industrial, Embedded SWE Intern</h3>
-        <p class="dates">May 2021 - Aug 2021</p>
-        <ul>
-            <li>embedded C firmware for agricultural equipment</li>
-            <li>graphical desktop applications with C# and WinForms.</li>
-        </ul>
-        <h3>University of Saskatchewan, B.Eng Computer Engineering</h3>
-        <p class="dates">Sept 2018 - April 2023</p>
-        <ul>
-            <li>Graduated with great distinction. Focus in Digital Systems and Software.</li>
-            <li>Awards for academic achievement:
-                Douglas Durie Memorial Scholarship Fall 2020, Fall 2023 | Agra Memorial Scholarship Fall 2020 |
-                Slapkauskas Scholarship in Engineering Winter 2021 | Dean's Honour Roll 2019, 2020, 2021, 2023.
-            </li>
-        </ul>
-    </div>
-
-    <div class="container">
-        <a href="link/to/full/project" class="project-link">
-            <div class="project">
-                <div class="project-content">
-                    <p class="project-header">Wireless LED Bracelet</p>
-                    <p class="project-summary">Wirelessly controlled light-up bracelet for use at concerts and live
-                        events.
-                    </p>
-                    <ul>
-                        <li>2.4GHz and connects over BLE to smartphones.</li>
-                        <li>Designed circuit and PCB around nRF52 SoC. Assembled and debugged form factor prototype.
-                        </li>
-                    </ul>
-                    <p class="project-date">March 2023</p>
-                </div>
-                <img src="bracelet.png" alt="Joom">
-            </div>
-        </a>
-        <a href="link/to/full/project" class="project-link">
-            <div class="project">
-                <div class="project-content">
-                    <p class="project-header">Cross Platform Audio Visualization Library</p>
-                    <p class="project-summary">Brief summary of the project. This section should give the
-                        reader
-                        a
-                        quick
-                        understanding of the project and its objectives.</p>
-                    <p class="project-date">Project Date</p>
-                </div>
-                <video autoplay muted loop src="audiovisdemo.mp4" alt="Joom">
-            </div>
-        </a>
-        <a href="link/to/full/project" class="project-link">
-            <div class="project">
-                <div class="project-content">
-                    <p class="project-header">ARM Cortex A8 Bootloader</p>
-                    <p class="project-summary">Brief summary of the project. This section should give the
-                        reader
-                        a
-                        quick
-                        understanding of the project and its objectives.</p>
-                    <p class="project-date">Project Date</p>
-                </div>
-            </div>
-        </a>
-        <a href="link/to/full/project" class="project-link">
-            <div class="project">
-                <div class="project-content">
-                    <p class="project-header">Block Puzzle Game</p>
-                    <p class="project-summary">Brief summary of the project. This section should give the
-                        reader
-                        a
-                        quick
-                        understanding of the project and its objectives.</p>
-                    <p class="project-date">Project Date</p>
-                </div>
-                <img src="javajoom.png" alt="Joom">
-            </div>
-        </a>
-        <a href="link/to/full/project" class="project-link">
-            <div class="project">
-                <div class="project-content">
-                    <p class="project-header">Rocket Telemetry</p>
-                    <p class="project-summary">Brief summary of the project. This section should give the
-                        reader
-                        a
-                        quick
-                        understanding of the project and its objectives.</p>
-                    <p class="project-date">Project Date</p>
-                </div>
-            </div>
-        </a>
-    </div>
-
 
 </body>
 
