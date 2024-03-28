@@ -20,6 +20,19 @@
             scrollbar-width: none;
         }
 
+        .bgcolor {
+            display: block;
+            /* Remove default margin of canvas */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: rgba(0, 0, 0, 1);
+            /* Ensure the canvas stays in the background */
+        }
+
         canvas {
             display: block;
             /* Remove default margin of canvas */
@@ -311,6 +324,7 @@
 
 <body id="mainbody">
     <canvas id="background"></canvas>
+    <div class="bgcolor"></div>
     <div class="contents">
         <!-- <button id="projectsButton">Projects</button> -->
         <script src="index.js"></script>
@@ -361,7 +375,7 @@
                     <li>Led embedded C firmware development for low-power wearables.</li>
                     <li>Implemented signal processing pipelines for biometrics on Cortex-M MCUs.</li>
                     <li>Wrote python scripts for tools and test rigs.</li>
-                    <li>Integrated common peripherals such as BLE, I2C, SPI, UART, ADC, PWM</li>
+                    <li>Integrated common peripherals such as BLE, I2C, SPI, UART, ADC, PWM.</li>
                     <li>PCB layout, SMT assembly, hardware debugging, and board bringup.</li>
                 </ul>
                 <h3>Garmin | Embedded SWE Intern</h3>
@@ -392,7 +406,7 @@
         </div>
 
         <div id="projects" class="tab">
-            <a href="link/to/full/project" class="project-link">
+            <a href="github.com/HunterWhyte/WirelessLEDBracelet" class="project-link">
                 <div class="project">
                     <div class="project-content">
                         <p class="project-header">Wireless LED Bracelet</p>
@@ -400,16 +414,16 @@
                             events.
                         </p>
                         <ul>
-                            <li>2.4GHz and connects over BLE to smartphones.</li>
-                            <li>Designed circuit and PCB around nRF52 SoC. Assembled and debugged form factor prototype.
-                            </li>
+                            <li>Designed circuit and PCB around nRF52 SoC. Assembled and debugged form factor prototype.</li>
+                            <li>Uses 2.4GHz radio to receive commands from controller and connect over BLE to smartphones.</li>
+                            <li>Developed embedded C firmware integrating UART, I2C, BLE, NFC, and ANT.</li>
                         </ul>
                         <p class="project-date">March 2023</p>
                     </div>
-                    <img src="bracelet.png" alt="Joom">
+                    <img src="bracelet.png" alt="3D render of bracelet PCB">
                 </div>
             </a>
-            <a href="link/to/full/project" class="project-link">
+            <a href="github.com/HunterWhyte/jumaudio" class="project-link">
                 <div class="project">
                     <div class="project-content">
                         <p class="project-header">Cross Platform Audio Visualization Library</p>
@@ -423,10 +437,10 @@
                     <video autoplay muted loop src="audiovisdemo.mp4" alt="Joom">
                 </div>
             </a>
-            <a href="link/to/full/project" class="project-link">
+            <a href="github.com/HunterWhyte/bbb-baremetal" class="project-link">
                 <div class="project">
                     <div class="project-content">
-                        <p class="project-header">ARM Cortex A8 Bootloader</p>
+                        <p class="project-header">Baremetal ARM Cortex A8 Application</p>
                         <p class="project-summary">Brief summary of the project. This section should give the
                             reader
                             a
@@ -436,7 +450,7 @@
                     </div>
                 </div>
             </a>
-            <a href="link/to/full/project" class="project-link">
+            <a href="clydagnathus.itch.io/joom-demo" class="project-link">
                 <div class="project">
                     <div class="project-content">
                         <p class="project-header">Block Puzzle Game</p>
@@ -450,7 +464,7 @@
                     <img src="javajoom.png" alt="Joom">
                 </div>
             </a>
-            <a href="link/to/full/project" class="project-link">
+            <a href="github.com/HunterWhyte/Rocket-Telemetry-Project" class="project-link">
                 <div class="project">
                     <div class="project-content">
                         <p class="project-header">Rocket Telemetry</p>

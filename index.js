@@ -22,7 +22,21 @@ async function createShader(gl, type, url) {
 let mouseX = 0;
 let mouseY = 0;
 
+function isPhone() {
+  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || (window.innerWidth <= 1000 && window.innerHeight <= 800);
+}
+
 async function initWebGL() {
+  // Disable WebGL for phones
+  // if (isPhone()) {
+  if(isPhone()){
+    // Here you can disable the WebGL functionality
+    // For example, by hiding the canvas or displaying a message
+    document.getElementById("background").style.display = 'none';
+    document.getElementById("background").style.background = 'black';
+    return;
+  }
+
   const gl = document.getElementById("background").getContext('webgl');
   const vertexShader = await createShader(gl, gl.VERTEX_SHADER, 'passthrough.vert');
   const fragmentShader = await createShader(gl, gl.FRAGMENT_SHADER, 'background.frag');
@@ -34,11 +48,11 @@ async function initWebGL() {
   const mouseUniformLocation = gl.getUniformLocation(program, 'u_mouse');
 
   body = document.getElementById("mainbody");
-  body.addEventListener('mousemove', function(event) {
+  body.addEventListener('mousemove', function (event) {
     // Calculate mouse position in WebGL coordinates
     var rect = body.getBoundingClientRect();
     mouseX = (event.clientX - rect.left);// / gl.canvas.width;
-    mouseY = rect.height - (event.clientY - rect.top) - 1; 
+    mouseY = rect.height - (event.clientY - rect.top) - 1;
   });
 
   var positionBuffer = gl.createBuffer();
@@ -119,32 +133,32 @@ function openTab(tabName) {
 
   // Iterate over all tabs
   for (var i = 0; i < allTabs.length; i++) {
-      var currentTab = allTabs[i];
-      currentTab.style.height = '0'; // Close all tabs
-      currentTab.classList.remove('tab-active'); // Remove active class from tabs
+    var currentTab = allTabs[i];
+    currentTab.style.height = '0'; // Close all tabs
+    currentTab.classList.remove('tab-active'); // Remove active class from tabs
 
-      // Remove highlight from all buttons
-      var btn = document.querySelector(`.btn[data-tab="${currentTab.id}"]`);
-      if (btn) {
-          btn.classList.remove('btn-active');
-      }
+    // Remove highlight from all buttons
+    var btn = document.querySelector(`.btn[data-tab="${currentTab.id}"]`);
+    if (btn) {
+      btn.classList.remove('btn-active');
+    }
   }
 
   // Toggle the clicked tab
   if (!wasOpen) {
-      tab.classList.add('tab-active');
-      tab.style.height = 'auto';
-      var fullHeight = tab.clientHeight + 'px';
-      tab.style.height = '0';
+    tab.classList.add('tab-active');
+    tab.style.height = 'auto';
+    var fullHeight = tab.clientHeight + 'px';
+    tab.style.height = '0';
 
-      setTimeout(() => {
-          tab.style.height = fullHeight;
-      }, 10);
+    setTimeout(() => {
+      tab.style.height = fullHeight;
+    }, 10);
 
-      // Highlight the button corresponding to the open tab
-      var activeBtn = document.querySelector(`.btn[data-tab="${tabName}"]`);
-      if (activeBtn) {
-          activeBtn.classList.add('btn-active');
-      }
+    // Highlight the button corresponding to the open tab
+    var activeBtn = document.querySelector(`.btn[data-tab="${tabName}"]`);
+    if (activeBtn) {
+      activeBtn.classList.add('btn-active');
+    }
   }
 }
