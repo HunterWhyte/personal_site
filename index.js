@@ -18,6 +18,7 @@ async function createShader(gl, type, url) {
   }
   return shader;
 }
+var mousePosition = [0, 0]; // Initialize mouse position
 
 async function initWebGL() {
   const gl = document.getElementById("background").getContext('webgl');
@@ -28,6 +29,14 @@ async function initWebGL() {
   const timeUniformLocation = gl.getUniformLocation(program, "u_time");
   const positionAttributeLocation = gl.getAttribLocation(program, "a_position");
   const resolutionUniformLocation = gl.getUniformLocation(program, "u_resolution");
+  const mouseUniformLocation = gl.getUniformLocation(program, 'u_mouse');
+
+  gl.canvas.addEventListener('mousemove', function(event) {
+    // Calculate mouse position in WebGL coordinates
+    var rect = gl.canvas.getBoundingClientRect();
+    mousePosition[0] = (event.clientX - rect.left) / gl.canvas.width;
+    mousePosition[1] = 1.0 - (event.clientY - rect.top) / gl.canvas.height;
+  });
 
   var positionBuffer = gl.createBuffer();
   gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
@@ -62,6 +71,7 @@ async function initWebGL() {
 
     gl.uniform1f(timeUniformLocation, time * 0.001);
     gl.uniform2f(resolutionUniformLocation, gl.canvas.width, gl.canvas.height);
+    gl.uniform2f(mouseUniformLocation, mousePosition[0], mousePosition[1]);
 
     var primitiveType = gl.TRIANGLES;
     gl.drawArrays(primitiveType, offset, 6);
