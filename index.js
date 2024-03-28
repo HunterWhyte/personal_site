@@ -97,27 +97,38 @@ function resizeCanvas(gl) {
 initWebGL();
 
 function openTab(tabName) {
-  var tab = document.getElementById(tabName);
-  var isOpen = tab.style.height !== '0px' && tab.style.height !== ''; // Check if the tab is open
-
-  // Close all tabs
   var allTabs = document.getElementsByClassName("tab");
+  var tab = document.getElementById(tabName);
+  var wasOpen = tab.style.height !== '0px' && tab.style.height !== '';
+
+  // Iterate over all tabs
   for (var i = 0; i < allTabs.length; i++) {
-      allTabs[i].style.height = '0'; // Set height to 0 to close the tab
-      allTabs[i].classList.remove('tab-active'); // Remove active class
+      var currentTab = allTabs[i];
+      currentTab.style.height = '0'; // Close all tabs
+      currentTab.classList.remove('tab-active'); // Remove active class from tabs
+
+      // Remove highlight from all buttons
+      var btn = document.querySelector(`.btn[data-tab="${currentTab.id}"]`);
+      if (btn) {
+          btn.classList.remove('btn-active');
+      }
   }
 
-  // If the clicked tab was already open (and now closed), do not reopen it
-  if (isOpen) return;
+  // Toggle the clicked tab
+  if (!wasOpen) {
+      tab.classList.add('tab-active');
+      tab.style.height = 'auto';
+      var fullHeight = tab.clientHeight + 'px';
+      tab.style.height = '0';
 
-  // Open the clicked tab if it was not already open
-  tab.classList.add('tab-active'); // Add active class for padding
-  tab.style.height = 'auto'; // Set height to auto to fit content
-  var fullHeight = tab.clientHeight + 'px'; // Get the full height
-  tab.style.height = '0'; // Reset height to 0 to start the transition
+      setTimeout(() => {
+          tab.style.height = fullHeight;
+      }, 10);
 
-  // Use setTimeout to allow the browser to render the height change to '0'
-  setTimeout(() => {
-      tab.style.height = fullHeight; // Set the full height to expand the tab
-  }, 10); // Small timeout before starting the animation
+      // Highlight the button corresponding to the open tab
+      var activeBtn = document.querySelector(`.btn[data-tab="${tabName}"]`);
+      if (activeBtn) {
+          activeBtn.classList.add('btn-active');
+      }
+  }
 }

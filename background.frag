@@ -59,6 +59,7 @@ float fbm(vec2 uv)
 void main()
 {
     vec2 uv = (fragCoord - 0.5 * iResolution.xy)/iResolution.y;
+    uv.x += 0.35;
     vec3 col = vec3(.0);
     uv += fbm(uv + iTime * .5);
     float dist = abs(uv.x);
