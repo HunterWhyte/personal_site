@@ -51,6 +51,9 @@ async function initWebGL() {
   gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(positions), gl.STATIC_DRAW);
 
   requestAnimationFrame(function render(time) {
+    gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+    gl.enable(gl.BLEND);
+
     if (resizeCanvas(gl)) {
       gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
     }
