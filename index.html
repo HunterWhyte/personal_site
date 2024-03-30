@@ -16,6 +16,7 @@
             ::-webkit-scrollbar {
                 display: none;
             }
+
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
@@ -65,11 +66,14 @@
             display: flex;
             align-items: center;
             margin-bottom: 15px;
-            padding: 15px;
+            padding-left: 25px;
+            padding-right: 25px;
+            padding-top: 0px;
+            padding-bottom: 0px;
             border-radius: 7px;
-            background: rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(3px);
-            -webkit-backdrop-filter: blur(3px);
+            background: rgba(12, 12, 12, 0.2);
+            backdrop-filter: blur(2px);
+            -webkit-backdrop-filter: blur(2px);
             transition: 0.3s ease;
             /* Add transition to the base state */
         }
@@ -82,38 +86,40 @@
 
         .project img {
             height: auto;
-            width: 15%;
+            width: 20%;
             margin: auto;
             border-radius: 5px;
         }
 
         .project video {
             height: auto;
-            width: 25%;
+            width: 20%;
             margin-left: 5px;
             border-radius: 5px;
         }
 
         .project-content {
-            flex: 1;
+            flex: 1
         }
 
         .project-header {
-            font-size: 20px;
+            font-size: 1.25em;
             font-weight: 600;
             color: white;
-            margin-bottom: 5px;
+            margin-bottom: 0px;
         }
 
         .project-summary {
-            font-size: 16px;
+            font-size: 1em;
             color: white;
+            margin: 7px;
         }
 
         .project-date {
-            font-size: 14px;
-            color: white;
-            margin-top: 10px;
+            font-size: 0.8em;
+            font-weight: 600;
+            margin-left: 10px;
+            color: rgba(255, 255, 255, 0.802);
         }
 
         .project-link {
@@ -146,7 +152,7 @@
         .contact-info:hover {
             text-decoration: underline;
             text-shadow: 0 0 12px rgba(255, 255, 255, 0.8);
-            transform: translateY(-2px);
+            transform: translateX(-1px);
         }
 
         .contact-info img {
@@ -191,6 +197,10 @@
             backdrop-filter: blur(3px);
             -webkit-backdrop-filter: blur(3px);
             transition: 0.3s ease;
+        }
+
+        .card:hover {
+            background: rgba(133, 133, 133, 0.05);
         }
 
         h2 {
@@ -288,7 +298,8 @@
         }
 
         .footer {
-            position: fixed; /* Fix position to the bottom of the viewport */
+            position: fixed;
+            /* Fix position to the bottom of the viewport */
             bottom: 0;
             width: 100%;
             align-items: middle;
@@ -300,11 +311,13 @@
             font-family: arial;
             font-size: 0.6em;
             font-weight: 100;
-            color: rgba(255, 255, 255, 0.67); /* Light text color */
-            text-align: center; /* Center-align the text */
-            padding: 10px 0; /* Add some padding for spacing */
+            color: rgba(255, 255, 255, 0.67);
+            /* Light text color */
+            text-align: center;
+            /* Center-align the text */
+            padding: 10px 0;
+            /* Add some padding for spacing */
         }
-
     </style>
 </head>
 
@@ -368,7 +381,8 @@
                 <p class="dates">Sept 2021 - Aug 2022</p>
                 <ul>
                     <li>Developed embedded C/C++ firmware for low-power wireless devices.</li>
-                    <li>Worked as a member of the team responsible for low-level integration of wireless protocols into products.</li>
+                    <li>Worked as a member of the team responsible for low-level integration of wireless protocols into
+                        products.</li>
                     <li>Gained experience with BLE, WiFi, BTC, and ANT.</li>
                     <li>Debugged hardware issues with spectrum analyzers, oscilloscopes, and logic analyzers.</li>
                     <li>Documented software issues and test procedures using Jira and Confluence.</li>
@@ -392,75 +406,195 @@
         </div>
 
         <div id="projects" class="tab">
-            <a href="github.com/HunterWhyte/WirelessLEDBracelet" class="project-link">
+            <a href="insert link" class="project-link">
                 <div class="project">
                     <div class="project-content">
-                        <p class="project-header">Wireless LED Bracelet</p>
+                        <p class="project-header">Wireless LED Bracelet <span class="project-date">March 2023</span>
+                        </p>
+
                         <p class="project-summary">Wirelessly controlled light-up bracelet for use at concerts and live
                             events.
                         </p>
                         <ul>
-                            <li>Designed circuit and PCB around nRF52 SoC. Assembled and debugged form factor prototype.</li>
-                            <li>Uses 2.4GHz radio to receive commands from controller and connect over BLE to smartphones.</li>
+                            <li>Designed PCB around nRF52 SoC. Assembled and debugged form factor prototype.</li>
+                            <li>Uses 2.4GHz radio to receive commands from controller and connect over BLE to
+                                smartphones.</li>
                             <li>Developed embedded C firmware integrating UART, I2C, BLE, NFC, and ANT.</li>
                         </ul>
-                        <p class="project-date">March 2023</p>
                     </div>
                     <img src="bracelet.png" alt="3D render of bracelet PCB">
                 </div>
             </a>
-            <a href="github.com/HunterWhyte/jumaudio" class="project-link">
+            <a href="insert link" class="project-link">
                 <div class="project">
                     <div class="project-content">
-                        <p class="project-header">Cross Platform Audio Visualization Library</p>
-                        <p class="project-summary">Brief summary of the project. This section should give the
-                            reader
-                            a
-                            quick
-                            understanding of the project and its objectives.</p>
-                        <p class="project-date">Project Date</p>
+                        <p class="project-header">Cross Platform Audio Visualization Library <span
+                                class="project-date">December 2023</span></p>
+
+                        <p class="project-summary">Simple, cross-platform audio visualization library, with built-in
+                            file playback and capture.</p>
+                        <ul>
+                            <li>Written in C.</li>
+                            <li>Builds for web via emscripten.</li>
+                        </ul>
                     </div>
-                    <video autoplay muted loop src="audiovisdemo.mp4" alt="Joom">
+                    <video autoplay muted loop src="audiovisdemo.mp4" alt="demo of project">
                 </div>
             </a>
-            <a href="github.com/HunterWhyte/bbb-baremetal" class="project-link">
+            <a href="insert link" class="project-link">
                 <div class="project">
                     <div class="project-content">
-                        <p class="project-header">Baremetal ARM Cortex A8 Application</p>
-                        <p class="project-summary">Brief summary of the project. This section should give the
-                            reader
-                            a
-                            quick
-                            understanding of the project and its objectives.</p>
-                        <p class="project-date">Project Date</p>
+                        <p class="project-header">Baremetal ARM Cortex A8 Application <span
+                                class="project-date">February 2023</span></p>
+
+                        <p class="project-summary">Simple bare metal application for TI AM335x (Cortex-A8)
+                            microprocessor.</p>
+                        <ul>
+                            <li>Written from scratch in C and ARM assembly language.</li>
+                            <li>Tested on hardware using Beaglebone Black SBC.</li>
+                            <li>Performs initialization of PLLs, peripherals, eMMC, and external memory (no HAL).</li>
+                            <li>Functions as second-stage bootloader.</li>
+                        </ul>
+                    </div>
+                    <img src="bbb.png">
+                </div>
+            </a>
+            <a href="insert link" class="project-link">
+                <div class="project">
+                    <div class="project-content">
+                        <p class="project-header">Block Puzzle Game <span class="project-date">April 2022</span></p>
+
+                        <p class="project-summary">Lumines inspired puzzle game written from scratch.</p>
+                        <ul>
+                            <li>Custom 2D OpenGL graphics engine with a framework enabling user generated content.</li>
+                            <li>Features audio visualization.</li>
+                            <li>Custom node-based graphics editor and tools.</li>
+                            <li>Written in Java.</li>
+                        </ul>
+                    </div>
+                    <img src="javajoom.png">
+                </div>
+            </a>
+            <a href="insert link" class="project-link">
+                <div class="project">
+                    <div class="project-content">
+                        <p class="project-header">STM32F4 Polyphonic MIDI Synthesizer <span class="project-date">January
+                                2021</span></p>
+
+                        <ul>
+                            <li>Direct MIDI input.</li>
+                            <li>8 voice polyphonic output.</li>
+                            <li>Written in C, tested on STM32F4 eval board.</li>
+                        </ul>
+                    </div>
+                    <img src="stm32f4disco.png">
+                </div>
+            </a>
+            <a href="insert link" class="project-link">
+                <div class="project">
+                    <div class="project-content">
+                        <p class="project-header">Rocket Telemetry <span class="project-date">April 2018</span></p>
+
+                        <p class="project-summary">Realtime model rocket location/altitude tracking.</p>
+                        <ul>
+                            <li>Arduino based rocket payload featuring 2.4GHz RF, GPS, IMU, remotely activated camera.
+                            </li>
+                            <li>Base station connects to graphical application written in Python.</li>
+                            <li>Uses brushed motors + quadcopter props for descent steering.</li>
+                        </ul>
+                    </div>
+                    <img src="gpsdata.gif">
+                </div>
+            </a>
+            <a href="" class="project-link">
+                <div class="project">
+                    <div class="project-content">
+                        <p class="project-header">Posture Monitor <span class="project-date">December 2016</span></p>
+                        <p class="project-summary">Bluetooth enabled spinal position monitoring and posture correction
+                            device.</p>
+                        <ul>
+                            <li>Uses a stretch sensor to measure the distance between two points on the spine.</li>
+                            <li>Measures current spine position against a calibrated ideal position.</li>
+                            <li>Notifies user via vibration/lights and smartphone app.</li>
+                        </ul>
+                    </div>
+                    <img src="posture_monitor.png">
+                </div>
+            </a>
+            <a href="" class="project-link">
+                <div class="project">
+                    <div class="project-content">
+                        <p class="project-header">ncurses MIDI Sequencer <span class="project-date">March
+                                2019</span></p>
+
+                        <p class="project-summary">Basic ncurses MIDI sequencer (bad idea).</p>
+                        <ul>
+                            <li>Takes keyboard input as different notes.</li>
+                            <li>Loops over input playing out over selected MIDI channel.</li>
+                            <li>Written in C.</li>
+                        </ul>
+                    </div>
+                    <img src="midi_sequencer.png">
+                </div>
+            </a>
+            <a href="" class="project-link">
+                <div class="project">
+                    <div class="project-content">
+                        <p class="project-header">MIDI Chat Bot <span class="project-date">March 2020</span></p>
+
+                        <p class="project-summary">IRC bot that plays MIDI notes on host computer.</p>
+                        <ul>
+                            <li>Intended for use while livestreaming so that viewers can interactively play notes.</li>
+                            <li>Supports single note melodies and chord progressions.</li>
+                            <li>Written in Python.</li>
+                        </ul>
                     </div>
                 </div>
             </a>
-            <a href="clydagnathus.itch.io/joom-demo" class="project-link">
+            <a href="" class="project-link">
                 <div class="project">
                     <div class="project-content">
-                        <p class="project-header">Block Puzzle Game</p>
-                        <p class="project-summary">Brief summary of the project. This section should give the
-                            reader
-                            a
-                            quick
-                            understanding of the project and its objectives.</p>
-                        <p class="project-date">Project Date</p>
+                        <p class="project-header">Poker Study Tool <span class="project-date">May 2020</span></p>
+
+
+                        <p class="project-summary">A study tool for 3 person sit and gos.</p>
+                        <ul>
+                            <li>Looks up correct play for a given situation from a study guide.</li>
+                            <li>Takes into account, position, stack, preflop action, and hand.</li>
+                        </ul>
                     </div>
-                    <img src="javajoom.png" alt="Joom">
+                    <img src="poker_study_tool.png">
                 </div>
             </a>
-            <a href="github.com/HunterWhyte/Rocket-Telemetry-Project" class="project-link">
+            <a href="" class="project-link">
                 <div class="project">
                     <div class="project-content">
-                        <p class="project-header">Rocket Telemetry</p>
-                        <p class="project-summary">Brief summary of the project. This section should give the
-                            reader
-                            a
-                            quick
-                            understanding of the project and its objectives.</p>
-                        <p class="project-date">Project Date</p>
+                        <p class="project-header">Poker Hand History Parser <span class="project-date">May 2020</span>
+                        </p>
+                        <p class="project-summary">Hand history parser for party poker with cEV calculator and graphing.
+                        </p>
+                        <ul>
+                            <li>Takes plaintext poker site hand histories as input.</li>
+                            <li>Parses into database for tracking useful stats.</li>
+                            <li>Odds calculator determines and records cEV.</li>
+                        </ul>
                     </div>
+                    <img src="hand_history.png">
+                </div>
+            </a>
+            <a href="" class="project-link">
+                <div class="project">
+                    <div class="project-content">
+                        <p class="project-header">USB MIDI Keyboard <span class="project-date">December 2016</span></p>
+                        <p class="project-summary">USB MIDI keyboard made from a broken electric piano I got for free.
+                        </p>
+                        <ul>
+                            <li>Ripped keyboard out of piano and wired up the key matrix to an Arduino.</li>
+                            <li>Full 88-key velocity sensitive MIDI keyboard.</li>
+                            <li>Arduino acts as HID USB-MIDI device.</li>
+                        </ul>
+                    </div>
+                    <img src="usb_midi_keyboard.png">
                 </div>
             </a>
         </div>
