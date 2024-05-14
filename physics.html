@@ -16,7 +16,7 @@
 
       .contents {
         font-family: Georgia;
-        font-size: smaller;
+        font-size: 0.75em;
         margin: auto;
         width: 75%;
         max-width: 800px;
@@ -158,7 +158,8 @@
   <body>
     <div class="contents">
       <h1>[WIP] Investigation into 2D Collision Detection for Convex Polygons</h1>
-      <h4>Hunter Whyte · May 2024<br><a href="https://github.com/HunterWhyte/jumphysics" class="source-link">source code</a></h4>
+      <h4>Hunter Whyte · May 2024<br><a href="https://github.com/HunterWhyte/jumphysics" class="source-link">source
+          code</a></h4>
       <p></p>
       <p>&emsp;<b>The goal:</b> Detect collisions between 2 moving (rotating & translating) convex polygons.</p>
       <p>
@@ -221,41 +222,104 @@
       <p>Algorithm for determining if the projection of the point overlaps with the projection of the polygon for a
         given axis:<br>
         &emsp;1. Iterate over all the vertices of the polygon and compute their dot product with the axis.<br>
-        &emsp;2. Find the max and min values from the dot product to defines the 1D region.<br>
+        &emsp;2. Find the max and min values from the dot product results to defines the projection interval.<br>
         &emsp;3. Perform the dot product of the point and the axis.<br>
-        If the point's projection lies within the min/max bounds of the polygon's projection then they are overlapping.
+        If the point's projection lies within the min/max bounds of the polygon's projection interval then they are
+        overlapping.
       </p>
 
       <pre class="code-block">
 <code>
-<span class="comment">// get vectors perpendicular to edge</span>
-<span class="variable">axes</span> = []
-<span class="keyword">for</span> <span class="variable">edge</span> <span class="keyword">in</span> <span class="variable">polygon</span>{
-  <span class="variable">axes</span>.<span class="function">add</span>(<span class="function">normal</span>(<span class="variable">edge</span>))
-}
-
-<span class="keyword">for</span> <span class="variable">axis</span> <span class="keyword">in</span> <span class="variable">axes</span> {
-  <span class="comment">// compute the projection of the polygon onto the selected axis</span>
-  <span class="variable">poly_proj</span> = []
-  <span class="keyword">for</span> <span class="variable">vertex</span> <span class="keyword">in</span> <span class="variable">polygon</span>{
-    <span class="variable">vertex_proj</span> = <span class="function">dot</span>(<span class="variable">axis</span>, <span class="variable">vertex</span>)
-    <span class="variable">poly_proj</span>.<span class="function">add</span>(<span class="variable">vertex_proj</span>)
+  <span class="comment">// get vectors perpendicular to edge</span>
+  <span class="variable">axes</span> = []
+  <span class="keyword">for</span> <span class="variable">edge</span> <span class="keyword">in</span> <span class="variable">polygon</span>{
+    <span class="variable">axes</span>.<span class="function">add</span>(<span class="function">normal</span>(<span class="variable">edge</span>))
   }
 
-  <span class="comment">// compute the projection of the point onto the selected axis</span>
-  <span class="variable">point_proj</span> = <span class="function">dot</span>(<span class="variable">axis</span>, <span class="variable">point</span>)
+  <span class="keyword">for</span> <span class="variable">axis</span> <span class="keyword">in</span> <span class="variable">axes</span> {
+    <span class="comment">// compute the projection of the polygon onto the selected axis</span>
+    <span class="variable">poly_proj</span> = []
+    <span class="keyword">for</span> <span class="variable">vertex</span> <span class="keyword">in</span> <span class="variable">polygon</span>{
+      <span class="variable">vertex_proj</span> = <span class="function">dot</span>(<span class="variable">axis</span>, <span class="variable">vertex</span>)
+      <span class="variable">poly_proj</span>.<span class="function">add</span>(<span class="variable">vertex_proj</span>)
+    }
 
-  <span class="comment">// check if the point is outside of the polygon projection</span>
-  <span class="keyword">if</span>(<span class="variable">point_proj</span> < <span class="function">min</span>(<span class="variable">poly_proj</span>) <span class="keyword">or</span> <span class="variable">point_proj</span> > <span class="function">fmax</span>(<span class="variable">poly_proj</span>)){
-    <span class="comment">// point is outside of polygon!</span>
+    <span class="comment">// compute the projection of the point onto the selected axis</span>
+    <span class="variable">point_proj</span> = <span class="function">dot</span>(<span class="variable">axis</span>, <span class="variable">point</span>)
+
+    <span class="comment">// check if the point is outside of the polygon projection</span>
+    <span class="keyword">if</span>(<span class="variable">point_proj</span> < <span class="function">min</span>(<span class="variable">poly_proj</span>) <span class="keyword">or</span> <span class="variable">point_proj</span> > <span class="function">fmax</span>(<span class="variable">poly_proj</span>)){
+      <span class="comment">// point is outside of polygon!</span>
+    }
   }
-}
 </code>
   </pre>
-      <h2>Determining if two convex polygons intersect</h2>
+      <h2>Separating axis theorem for two polygons</h2>
+      <p>&emsp;To determine if two convex polygons intersect there are two changes that must be made to the simplified
+        point-polygon algorithm shown above. Firstly, the axes given by the normals of <b>both</b> polygons must now be
+        checked as separating axes. Second, instead of checking whether the projection of the point lies within the
+        projection of the polygon, we must now check if the intervals given by the projections of the polygons
+        overlap.<br>
+
       <div class="demo-container">
         <iframe src="demos/poly_to_poly.html" width=100% height=100%></iframe>
       </div>
+      <h5>Interactive demo for checking if two polygons intersect. <br>Move the mouse to move one polygon,
+        click to switch to a different polygon.</h5>
+        <p>
+          · White lines represent the axes we are checking. <br>
+          · Green lines are the projection of the polygon in the center. <br>
+          · Blue lines are the projection of the polygon following the mouse. <br>
+          · If the intervals given by projections are overlapping the axis becomes red <br>
+        </p>
+
+      <p> Our algorithm for determining if two polygons A & B overlap for a given axis is now as follows: <br>
+        &emsp;1. Iterate over all the vertices of polygon A and compute their dot product with the axis.<br>
+        &emsp;2. Find the max and min values from the dot product results to defines the projection interval.<br>
+        &emsp;3. Repeat 1. and 2. for polygon B<br>
+        &emsp;4. Given <span class="quote-highlight">a_max_p</span> as the max point of polygon A's projection, <span
+          class="quote-highlight">a_min_p</span> as the min, and <span class="quote-highlight">b_max_p</span>, <span
+          class="quote-highlight">b_min_p</span> for polygon B. Compute the amount of overlap with the following formula
+        <span class="quote-highlight">overlap = min(a_max_p, b_max_p) - max(a_min_p, b_min_p)</span>
+        &emsp;5. If the computed overlap value <= 0 then the projections do not overlap.<br>
+
+          <br>In pseudo-code the full algorithm is as follows:<br>
+          <pre class="code-block">
+<code>
+  <span class="comment">// get vectors perpendicular to edge</span>
+  <span class="variable">axes</span> = []
+  <span class="keyword">for</span> <span class="variable">edge</span> <span class="keyword">in</span> <span class="variable">polygon_A</span>{
+    <span class="variable">axes</span>.<span class="function">add</span>(<span class="function">normal</span>(<span class="variable">edge</span>))
+  }
+  <span class="keyword">for</span> <span class="variable">edge</span> <span class="keyword">in</span> <span class="variable">polygon_B</span>{
+    <span class="variable">axes</span>.<span class="function">add</span>(<span class="function">normal</span>(<span class="variable">edge</span>))
+  }
+  
+  <span class="keyword">for</span> <span class="variable">axis</span> <span class="keyword">in</span> <span class="variable">axes</span> {
+    <span class="comment">// compute the projection of polygon A onto the selected axis</span>
+    <span class="variable">A_proj</span> = []
+    <span class="keyword">for</span> <span class="variable">vertex</span> <span class="keyword">in</span> <span class="variable">polygon_A</span>{
+      <span class="variable">vertex_proj</span> = <span class="function">dot</span>(<span class="variable">axis</span>, <span class="variable">vertex</span>)
+      <span class="variable">A_proj</span>.<span class="function">add</span>(<span class="variable">vertex_proj</span>)
+    }
+  
+    <span class="comment">// compute the projection of polygon A onto the selected axis</span>
+    <span class="variable">B_proj</span> = []
+    <span class="keyword">for</span> <span class="variable">vertex</span> <span class="keyword">in</span> <span class="variable">polygon_B</span>{
+      <span class="variable">vertex_proj</span> = <span class="function">dot</span>(<span class="variable">axis</span>, <span class="variable">vertex</span>)
+      <span class="variable">B_proj</span>.<span class="function">add</span>(<span class="variable">vertex_proj</span>)
+    }
+  
+    <span class="comment">// compute the overlap of the intervals given by the polygon projections</span>
+    <span class="keyword">float</span> <span class="variable">overlap</span> = <span class="function">min</span>(<span class="function">max</span>(<span class="variable">A_proj</span>), <span class="function">max</span>(<span class="variable">B_proj</span>)) - <span class="function">max</span>(<span class="function">min</span>(<span class="variable">A_proj</span>), <span class="function">min</span>(<span class="variable">B_proj</span>));
+    <span class="keyword">if</span>(<span class="variable">overlap</span> <span class="keyword"><=</span> 0){
+      <span class="comment">// polygons do not intersect!</span>
+    }
+  }  
+</code>
+</pre>
+      </p>
+
       <h2>[WIP] Where discrete collision detection fails</h2>
       <h2>[WIP] Continuous Collision Detection</h2>
       <h2>[WIP] Computing Distance</h2>
