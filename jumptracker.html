@@ -1,0 +1,277 @@
+<!doctypehtml>
+  <html lang=en-us>
+
+  <head>
+    <meta charset=utf-8>
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no" name=viewport>
+    <title>Hunter GW | Jump Clip</title>
+    <style>
+      body {
+        margin: 50;
+        justify-content: center;
+        align-items: center;
+        background-color: #000;
+        display: flex;
+      }
+
+      .contents {
+        font-family: Georgia;
+        font-size: 0.75em;
+        margin: auto;
+        width: 75%;
+        max-width: 800px;
+        text-align: left;
+        justify-content: center;
+        align-items: center;
+        color: rgb(238, 234, 227);
+        position: relative;
+      }
+
+      .video-container {
+        width: 100%;
+        max-width: 800px;
+        height: auto;
+        aspect-ratio: 16 / 9;
+        margin: 20px auto;
+        position: relative;
+        overflow: hidden;
+        border-radius: 10px;
+        border: 1px solid white;
+      }
+
+      .video-container video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      iframe {
+        width: 100%;
+        height: 100%;
+        margin: auto;
+        border: 1px solid white;
+      }
+
+      .contents h1 {
+        text-align: center;
+        /* Centers the text of the h1 element */
+      }
+
+      .contents ul {
+        font-size: 1.2em;
+        /* Centers the text of the h1 element */
+      }
+
+      .contents h3 {
+        text-align: left;
+        font-size: 1.5em;
+        font-weight: 100;
+        /* Centers the text of the h1 element */
+      }
+
+      .contents h4 {
+        color: rgb(147, 147, 147);
+        font-weight: 100;
+        font-size: 1.5em;
+        text-align: center;
+        /* Centers the text of the h1 element */
+        margin-top: -15px;
+      }
+
+      .contents h5 {
+        color: rgb(233, 233, 233);
+        font-weight: 250;
+        font-size: 1.3em;
+        text-align: center;
+        /* Centers the text of the h1 element */
+        margin-top: 0px;
+      }
+
+      .contents p {
+        font-size: 1.4em;
+        text-align: left;
+        /* Centers the text of the h1 element */
+      }
+
+      .quote-highlight {
+        background-color: #373737;
+        color: #fff;
+        /* Light grey background */
+        font-style: italic;
+        /* Optional: italicize the quote */
+      }
+
+      .source-link {
+        color: #ccc;
+        text-decoration: none;
+      }
+
+      .source-link:hover {
+        color: #fff;
+        text-decoration: underline;
+      }
+
+      .side-note {
+        color: #ccc;
+        font-size: 0.75em;
+        font-weight: 100;
+      }
+
+      .image-container {
+        width: auto;
+        height: 150px;
+        display: flex;
+        /* Use flexbox to center the image */
+        justify-content: center;
+        /* Center horizontally */
+        align-items: center;
+        /* Center vertically */
+        margin: auto;
+        /* Space above and below the image container */
+      }
+
+      .image-container2 {
+        width: auto;
+        height: 300px;
+        display: flex;
+        /* Use flexbox to center the image */
+        justify-content: center;
+        /* Center horizontally */
+        align-items: center;
+        /* Center vertically */
+        margin: auto;
+        /* Space above and below the image container */
+      }
+
+      .image-container3 {
+        width: auto;
+        height: 500px;
+        display: flex;
+        /* Use flexbox to center the image */
+        justify-content: center;
+        /* Center horizontally */
+        align-items: center;
+        /* Center vertically */
+        margin: auto;
+        /* Space above and below the image container */
+      }
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain; /* or 'cover' if you want it to fill without letterboxing */
+        display: block;
+      }
+
+      .code-block {
+        font-family: 'Courier New', Courier, monospace;
+        background-color: #211e1d;
+        color: #ebdbb2;
+        padding-left: 5px;
+        border-radius: 5px;
+        overflow-x: auto;
+        white-space: pre;
+      }
+
+      .keyword {
+        color: #e78a4e;
+      }
+
+      .string {
+        color: #b8bb26;
+      }
+
+      .comment {
+        color: #928374;
+      }
+
+      .number {
+        color: #d3869b;
+      }
+
+      .function {
+        color: #a9b665;
+      }
+
+      .variable {
+        color: #e4e2c9;
+      }
+
+      .project-content {
+        flex: 1
+      }
+
+      .video {
+        height: auto;
+        width: auto;
+        margin-left: 5px;
+        border-radius: 5px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="contents">
+      <h1>[WIP] Wearable Jump Tracking Device for Athletes</h1>
+      <h4>Hunter Whyte · June 2025<br><a href="https://github.com/HunterWhyte" class="source-link">source
+          code</a></h4>
+      <p></p>
+      <p><b>The goal:</b> Detect jump height and frequency for progression tracking and stress monitoring in athletes.
+      </p>
+      <p>
+        <b>Theory of operation:</b> Continuously monitor for flight time and ground contact time events using a wearable
+        3-axis accelerometer, and upload the results to a mobile app over BLE.
+      </p>
+      <p>
+        Jump height, and other metrics such as RSI (reactive strength index) can be derived from flight time using basic
+        projectile motion equations (with an added calibration factor).
+      </p>
+      <div class="project-content">
+        <div class="video-container">
+          <video autoplay muted loop playsinline src="jumpdemo.mp4"></video>
+        </div>
+      </div>
+        <h5>Video overlay generated automatically using outputs from on-device processing.</h5>
+      <h2>Hardware Design</h2>
+      <p><b>PCB:</b> There are 4 main ICs used in the design:
+      <ul>
+        <li>SoC capable of BLE and signal processing</li>
+        <li>3-Axis accelerometer</li>
+        <li>NOR flash</li>
+        <li>PMIC for rechargeable battery</li>
+      </ul>
+      </p>
+      <div class="image-container">
+        <img src="jumpclip3.png">
+      </div>
+      <p>
+        <b>Form Factor:</b> The jump tracking device needs to be discreet and unobstructive for in-game use by ball
+        sport athletes
+        (basketball, volleyball etc.). The form factor of the device is a thin clip to be worn on the athlete's
+        waistband (prototype dimensions: ~38mm x 13mm x 7.5mm)
+      </p>
+      <div class="image-container2">
+        <img src="jumpclip1.png">
+      </div>
+
+      <h2>Firmware Design</h2>
+      <p> [WIP]
+      </p>
+
+      <h2>Processing Pipelines and Validation</h2>
+      <p> [WIP]
+      </p>
+
+      <h2>Mobile App</h2>
+      <p> [WIP]
+      </p>
+      <div class="image-container3">
+        <img src="jumpclipapp.png">
+      </div>
+
+      </p>
+    </div>
+  </body>
+
+  </html>
