@@ -49,13 +49,13 @@
       .contents h3 {
         text-align: left;
         font-size: 1.5em;
-        
+
         /* Centers the text of the h1 element */
       }
 
       .contents h4 {
         color: rgb(147, 147, 147);
-        
+
         font-size: 1.5em;
         text-align: center;
         /* Centers the text of the h1 element */
@@ -64,7 +64,7 @@
 
       .contents h5 {
         color: rgb(147, 147, 147);
-        
+
         font-size: 1.2em;
         text-align: center;
         /* Centers the text of the h1 element */
@@ -156,7 +156,7 @@
 
   <body>
     <div class="contents">
-      <h1>[WIP] Investigation into 2D Collision Detection for Convex Polygons</h1>
+      <h1>Investigation into 2D Collision Detection for Convex Polygons</h1>
       <h4>Hunter Whyte · May 2024<br><a href="https://github.com/HunterWhyte/jumphysics" class="source-link">source
           code</a></h4>
       <p></p>
@@ -265,12 +265,12 @@
       </div>
       <h5>Interactive demo for checking if two polygons intersect. <br>Move the mouse to move one polygon,
         click to switch to a different polygon.</h5>
-        <p>
-          · White lines represent the axes we are checking. <br>
-          · Green lines are the projection of the polygon in the center. <br>
-          · Blue lines are the projection of the polygon following the mouse. <br>
-          · If the intervals given by projections are overlapping the axis becomes red <br>
-        </p>
+      <p>
+        · White lines represent the axes we are checking. <br>
+        · Green lines are the projection of the polygon in the center. <br>
+        · Blue lines are the projection of the polygon following the mouse. <br>
+        · If the intervals given by projections are overlapping the axis becomes red <br>
+      </p>
 
       <p> Our algorithm for determining if two polygons A & B overlap for a given axis is now as follows: <br>
         &emsp;1. Iterate over all the vertices of polygon A and compute their dot product with the axis.<br>
@@ -317,24 +317,34 @@
   }  
 </code>
 </pre>
-      <div class="demo-container">
-      <iframe src="demos/pong.html" width=100% height=100%></iframe>
-      </div>
-      <h5>Interactive demo with full continuous collision detection</h5>
-        <p>
-          · W and S to move paddle up and down. <br>
-          · Arrow keys to rotate paddle. <br>
-          · Try modifying the settings in the menu. <br>
-        </p>
+          <h2>Continuous Collision Detection Demo!</h2>
+          <div class="demo-container">
+            <iframe src="demos/pong.html" width=100% height=100%></iframe>
+          </div>
+          <h5>Interactive demo with full continuous collision detection</h5>
+          <p>
+            · W and S to move paddle up and down. <br>
+            · Arrow keys to rotate paddle. <br>
+            · Try modifying the settings in the menu. <br>
+          </p>
 
+          <h2>Where discrete collision detection fails</h2>
+          <p>In progress</p>
+          <h2>Continuous Collision Detection</h2>
+          <p>In progress</p>
+          <h2>Computing Distance</h2>
+          <p>In progress</p>
+          <h2>Point to Line Segment</h2>
+          <p>In progress</p>
+          <h2>Point to Triangle</h2>
+          <p>In progress</p>
+          <h2>Point to Convex Polygon</h2>
+          <p>In progress</p>
+          <h2>Convex Polygon to Convex Polygon</h2>
+          <p>In progress</p>
+          <h2>Convex Polygon to Convex Polygon</h2>
+          <p>In progress</p>
 
-      <h2>[WIP] Where discrete collision detection fails</h2>
-      <h2>[WIP] Continuous Collision Detection</h2>
-      <h2>[WIP] Computing Distance</h2>
-      <h2>[WIP] Point to Line Segment</h2>
-      <h2>[WIP] Point to Triangle</h2>
-      <h2>[WIP] Point to Convex Polygon</h2>
-      <h2>[WIP] Convex Polygon to Convex Polygon</h2>
     </div>
   </body>
 
