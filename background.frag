@@ -19,19 +19,19 @@ void main()
     // Normalized pixel coordinates (from 0 to 1)
     vec2 uv = fragCoord/iResolution.xy;
     uv.x *= iResolution.x/iResolution.y;
-    uv.y -= iMouse.y/iResolution.y*0.1;
-    uv.x -= iMouse.x/iResolution.x*0.1;
+    uv.y -= iMouse.y/iResolution.y*0.05;
+    uv.x -= iMouse.x/iResolution.x*0.05;
     vec2 screenuv = uv;
     float mousey = iMouse.y/iResolution.y;
     uv.x += 0.5;
     uv *= 30.;// + 40.*mousey;
-    uv.y *= sin(uv.x/20. + iTime*0.35)*0.2 + 0.5;
+    uv.y *= sin(uv.x/20. + iTime*0.15)*0.2 + 0.5;
 
     // Time varying pixel color
     //vec3 col = 0.5 + 0.5*cos(iTime+uv.xyx+vec3(0,2,4));
     vec2 fuv = fract(uv);
     vec2 ssuv = floor(uv + 0.5);
-    ssuv.y /= sin(ssuv.x/20. + iTime*0.35)*0.2 + 0.5;
+    ssuv.y /= sin(ssuv.x/20. + iTime*0.15)*0.2 + 0.5;
     ssuv /= 30.;// + 40.*mousey;
     ssuv.x -= 0.5;
 

@@ -5,428 +5,273 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hunter Whyte</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        body,
-        html {
-            margin: 0;
-            padding: 0;
-            justify-content: center;
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-            /* hide scrollbar */
-            ::-webkit-scrollbar {
-                display: none;
-            }
+        :root {
+            --bg:   #08080f;
+            --s1:   #111119;
+            --s2:   #1a1a26;
+            --s3:   #26263a;
+            --tx:   #ffffff;
+            --tx2:  #c9c9dd;
+            --tx3:  #a09eb8;
+            --ui:   'Georgia', sans-serif;
+            --ui: 'Georgia', monospace;
 
-            -ms-overflow-style: none;
-            scrollbar-width: none;
+            --col:  880px;   /* one column width, used by every section */
+            --gut:  40px;    /* one gutter, used by every section */
+            --r:    6px;     /* one corner radius, used by everything */
+
+            --media-max:   25%;    /* media never exceeds a quarter of the card */
+            --media-max-h: 180px;  /* ...nor drives the card taller than its text */
         }
 
-        .bgcolor {
-            display: block;
-            /* Remove default margin of canvas */
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -2;
-            background: rgba(0, 0, 0, 1);
-            /* Ensure the canvas stays in the background */
+        html { scroll-behavior: smooth; -ms-overflow-style: none; scrollbar-width: none; }
+        html::-webkit-scrollbar { display: none; }
+
+        body {
+            background: var(--bg);
+            color: var(--tx);
+            font-family: var(--ui);
+            font-size: 15.5px;
+            line-height: 1.55;
+            -webkit-font-smoothing: antialiased;
         }
 
-        canvas {
+        ::selection { background: var(--tx2); color: var(--bg); }
+
+        canvas#background {
             display: block;
-            /* Remove default margin of canvas */
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             z-index: -1;
-            background: rgba(0, 0, 0, 1);
-            /* Ensure the canvas stays in the background */
+            opacity: 0.30;
         }
 
-        .contents {
-            font-family: Georgia;
-            margin: auto;
-            padding: 15px;
-            max-width: 900px;
-            font-size: 16px;
+        /* ── One column, one gutter, left aligned ─────────────────── */
+        .wrap {
+            max-width: var(--col);
+            margin: 0 auto;
+            padding: 0 var(--gut);
             text-align: left;
-            justify-content: center;
+        }
+
+        a { color: inherit; }
+
+        /* ── Masthead ─────────────────────────────────────────────── */
+        .masthead { padding: 78px 0 34px; }
+        .masthead h1 {
+            font-size: clamp(28px, 4vw, 38px);
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+            margin-bottom: 10px;
+        }
+        .masthead .role {
+            font-family: var(--ui);
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            color: var(--tx2);
+        }
+
+        .links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px 26px;
+            margin-top: 26px;
+        }
+        .links a {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: var(--ui);
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--tx2);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        .links a:hover { color: var(--tx); }
+        .links img {
+            height: 13px;
+            width: 13px;
+            object-fit: contain;
+            filter: invert(1);
+            opacity: 0.85;
+            transition: opacity 0.2s ease;
+        }
+        .links a:hover img { opacity: 1; }
+
+        /* ── Section heading ──────────────────────────────────────── */
+        section { padding-bottom: 30px; }
+        h2.tag {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            font-family: var(--ui);
+            font-weight: 700;
+            font-size: 13.5px;
+            letter-spacing: 0.26em;
+            color: var(--tx2);
+            margin-bottom: 26px;
+            padding-top: 34px;
+        }
+        section:first-of-type h2.tag { padding-top: 0; }
+        h2.tag .num { color: var(--tx3); }
+        h2.tag .line { flex: 1; height: 1px; background: var(--s3); }
+
+        /* ── Experience ───────────────────────────────────────────── */
+        .entry { padding: 20px 0; border-top: 1px solid var(--s3); }
+        .entry:first-of-type { border-top: none; padding-top: 4px; }
+        .entry h3 {
+            font-size: 15.5px;
+            font-weight: 600;
+            letter-spacing: -0.005em;
+            margin-bottom: 3px;
+        }
+        .entry .dates {
+            font-family: var(--ui);
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            color: var(--tx3);
+            margin-bottom: 12px;
+        }
+
+        ul { list-style: none; }
+        ul li {
             position: relative;
+            padding-left: 18px;
+            margin-bottom: 5px;
+            color: var(--tx2);
+            font-size: 15px;
+        }
+        ul li::before {
+            content: '';
+            position: absolute;
+            left: 2px; top: 9px;
+            width: 6px; height: 1px;
+            background: var(--tx3);
         }
 
-        .container {
-            padding: 0px;
-        }
-
+        /* ── Projects ─────────────────────────────────────────────── */
+        .project-link { display: block; text-decoration: none; }
         .project {
             display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-            padding-left: 25px;
-            padding-right: 25px;
-            padding-top: 0px;
-            padding-bottom: 0px;
-            border-radius: 7px;
-            background: rgba(12, 12, 12, 0.2);
-            backdrop-filter: blur(2px);
-            -webkit-backdrop-filter: blur(2px);
-            transition: 0.3s ease;
-            /* Add transition to the base state */
+            align-items: flex-start;
+            gap: 24px;
+            padding: 20px;
+            margin-bottom: 10px;
+            border: 1px solid transparent;
+            border-radius: var(--r);
+            background: var(--s1);
+            transition: background 0.2s ease, border-color 0.2s ease;
         }
-
-        .project:hover {
-            transform: translateY(-3px);
-            transform: translateX(-7px);
-            background: rgba(133, 133, 133, 0.3);
+        .project-link:hover .project {
+            background: var(--s2);
+            border-color: var(--s3);
         }
-
-        .project img {
-            height: auto;
-            width: 20%;
-            margin: auto;
-            border-radius: 5px;
-        }
-
-        .project video {
-            height: auto;
-            width: 20%;
-            margin-left: 5px;
-            border-radius: 5px;
-        }
-
-        .project video.portrait {
-            width: auto;
-            max-height: 150px;
-        }
-
-        .project-content {
-            flex: 1
-        }
-
+        .project-content { flex: 1; min-width: 0; }
         .project-header {
-            font-size: 1.25em;
+            font-size: 15.5px;
             font-weight: 600;
-            color: white;
-            margin-bottom: 0px;
+            letter-spacing: -0.005em;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            gap: 10px;
+            margin-bottom: 3px;
         }
-
-        .project-summary {
-            font-size: 1em;
-            color: white;
-            margin: 7px;
-        }
-
         .project-date {
-            font-size: 0.8em;
-            font-weight: 600;
-            margin-left: 10px;
-            color: rgba(255, 255, 255, 0.802);
+            font-family: var(--ui);
+            font-size: 12.5px;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            color: var(--tx3);
         }
+        .project-summary { color: var(--tx2); font-size: 15px; margin-bottom: 10px; }
 
-        .project-link {
-            text-decoration: none;
-            color: inherit;
+        /* flex item takes the image's own width, capped at a quarter of the card */
+        .thumb {
+            flex: 0 1 auto;
+            max-width: var(--media-max);
+            align-self: center;
+            display: flex;
+            justify-content: flex-end;
+            min-width: 0;
+        }
+        .thumb img, .thumb video {
             display: block;
+            width: auto;
+            height: auto;
+            max-width: 100%;
+            max-height: var(--media-max-h);
+            border-radius: 4px;
         }
 
-        .split-container {
+        /* ── Footer ───────────────────────────────────────────────── */
+        footer {
+            border-top: 1px solid var(--s3);
+            margin-top: 40px;
+            padding: 26px 0 40px;
+        }
+        footer .inner {
             display: flex;
             justify-content: space-between;
-
-        }
-
-        .contact-info {
-            display: inline-block;
-            text-decoration: none;
-            align-items: center;
-            justify-content: center;
-            vertical-align: middle;
-            font-size: 1em;
-            color: white;
-            /* Base color for the text */
-            margin-top: 0px;
-            margin-left: 0px;
-            margin-bottom: 5px;
-            transition: 0.3s ease;
-        }
-
-        .contact-info:hover {
-            text-decoration: underline;
-            text-shadow: 0 0 12px rgba(255, 255, 255, 0.8);
-            transform: translateX(-1px);
-        }
-
-        .contact-info img {
-            height: 15px;
-            width: auto;
-            border-radius: 0px;
-            border-radius: 0px;
-            vertical-align: middle;
-            margin-right: 3px;
-            filter: invert()
-        }
-
-        .experience {
-            margin-top: 60px;
-            margin-bottom: 60px;
-            padding: 20px;
-            align-items: middle;
-            justify-content: center;
-            vertical-align: middle;
-            text-align: left;
-            margin: auto;
-            background: rgba(12, 12, 12, 0.1);
-            backdrop-filter: blur(3px);
-            -webkit-backdrop-filter: blur(3px);
-            transition: 0.3s ease;
-        }
-
-        .experience:hover {
-            background: rgba(133, 133, 133, 0.2);
-        }
-
-        .card {
-            margin-top: 60px;
-            margin-bottom: 60px;
-            padding: 20px;
-            align-items: middle;
-            justify-content: center;
-            vertical-align: middle;
-            text-align: center;
-            margin: auto;
-            background: rgba(12, 12, 12, 0.2);
-            backdrop-filter: blur(3px);
-            -webkit-backdrop-filter: blur(3px);
-            transition: 0.3s ease;
-        }
-
-        .card:hover {
-            background: rgba(133, 133, 133, 0.05);
-        }
-
-        h2 {
-            color: white;
-            /* Base color for the text */
+            flex-wrap: wrap;
+            gap: 12px;
+            font-family: var(--ui);
+            font-size: 13px;
             font-weight: 700;
-            font-size: 1.75em;
-            margin-top: 10px;
-            margin-bottom: 2ch;
-            margin-left: 15px;
+            letter-spacing: 0.1em;
+            color: var(--tx3);
         }
 
-        h3 {
-            color: white;
-            font-size: 1.1em;
-            font-weight: 700;
-            margin-bottom: 0px;
+        @media (max-width: 820px) {
+            :root { --gut: 22px; }
+            .masthead { padding: 52px 0 26px; }
+            .project { gap: 18px; padding: 16px; }
         }
 
-        .dates {
-            font-size: 1em;
-            color: white;
-            margin-top: 0px;
-            margin-bottom: 5px;
-        }
-
-        .subheading {
-            font-size: 1em;
-            color: white;
-            /* Base color for the text */
-            margin-top: 10px;
-            margin-left: 0px;
-            margin-bottom: 5px;
-        }
-
-
-        ul {
-            color: white;
-            list-style-type: disc;
-            margin-top: 0px;
-            font-size: 1em;
-            padding-left: 20px;
-        }
-
-        .expanded {
-            min-height: 1000px;
-            /* Adjust based on content */
-        }
-
-        .button-container {
-            display: flex;
-            /* Use flexbox to lay out buttons side by side */
-            justify-content: center;
-            /* Center the buttons within the div */
-            gap: 10%;
-            margin-top: 20px;
-        }
-
-        .btn {
-            font-size: 1.5em;
-            padding: 10px 20px;
-            cursor: pointer;
-            background-color: hsla(0, 0%, 6%, 0.138);
-            color: white;
-            border: none;
-            border-radius: 5px;
-            transition: 0.3s ease;
-        }
-
-        .btn:hover {
-            background-color: rgba(255, 255, 255, 0.278);
-            transform: translateY(4px);
-        }
-
-        .btn-active {
-            background-color: rgba(255, 255, 255, 0.278);
-            transform: translateY(4px);
-        }
-
-        .tab {
-            overflow: hidden;
-            /* Hide content that overflows the container */
-            height: 0;
-            /* Start with 0 height */
-            padding: 0 20px;
-            /* Keep horizontal padding */
-            border-top: none;
-            transition: 0.65s ease;
-            /* Animate height and padding changes */
-        }
-
-        .tab-active {
-            padding: 20px;
-            /* Restore padding when the tab is active */
-        }
-
-        .footer {
-            position: fixed;
-            /* Fix position to the bottom of the viewport */
-            bottom: 0;
-            width: 100%;
-            align-items: middle;
-            justify-content: center;
-            vertical-align: middle;
-            text-align: center;
-            margin: auto;
-            background: rgba(12, 12, 12, 0.2);
-            font-family: arial;
-            font-size: 0.6em;
-            font-weight: 100;
-            color: rgba(255, 255, 255, 0.67);
-            /* Light text color */
-            text-align: center;
-            /* Center-align the text */
-            padding: 10px 0;
-            /* Add some padding for spacing */
+        @media (max-width: 560px) {
+            :root { --media-max: 100%; --media-max-h: 200px; }
+            .project { flex-direction: column-reverse; align-items: stretch; }
+            .thumb { justify-content: flex-start; }
         }
     </style>
 </head>
 
 <body id="mainbody">
     <canvas id="background"></canvas>
-    <div class="bgcolor"></div>
-    <div class="contents">
-        <!-- <button id="projectsButton">Projects</button> -->
-        <script src="index.js"></script>
-        <div class="card" id="projectsContainer" style="max-width: 66%;">
-            <div class="profile">
-                <h2>Hunter Whyte</h2>
-                <p class="subheading">Software Developer | Embedded Systems</p>
-                <p class="subheading">Saskatoon, SK</p>
-            </div>
-            <div class="contact">
-                <p>
-                </p>
-                <a href="mailto:huntergwhyte@gmail.com" title="Email" class="contact-info">
-                    <img src="mail.svg" alt="email">
-                    huntergwhyte@gmail.com
-                </a>
-            </div>
-            <div class="contact">
-                <a href="https://github.com/hunterwhyte" title="GitHub" class="contact-info">
-                    <img src="github-mark.svg" alt="github">
-                    github.com/hunterwhyte
-                </a>
-            </div>
-            <div class="contact">
-                <a href="https://www.linkedin.com/in/hunter-whyte-995447161/" title="LinkedIn" class="contact-info">
-                    <img src="linkedin.svg" alt="linkedin">
-                    hunterwhyte
-                </a>
-            </div>
-            <div class="contact">
-                <a href="resume_hunter_whyte.pdf" title="resume" class="contact-info">
-                    <img src="resume.svg" alt="resume">
-                    resume
-                </a>
-            </div>
 
-            <div class="button-container">
-                <button class="btn btn-active" data-tab="projects" onclick="openTab('projects')">Projects</button>
-                <button class="btn" data-tab="experience" onclick="openTab('experience')">Experience</button>
-            </div>
-        </div>
+    <div class="wrap">
 
-        <div id="experience" class="tab">
-            <div class="experience">
-                <h3>Garmin Canada | Software Developer I | Software Developer II</h3>
-                <p class="dates">August 2024 - May 2025 | June 2025 - Present</p>
-                <ul>
-                    <li>Embedded C/C++ firmware development targeting baremetal and RTOS-based environments.</li>
-                    <li>Contributed to low level core platform technology used across multiple products.</li>
-                    <li>Worked as part of a team responsible for bootloader development and OTA update support.</li>
-                    <li>Worked closely with vendors to bring up new SoC platforms for use in Garmin products.</li>
-                    <li>Created and maintained automated regression tests that run on hardware as part of CI.</li>
-                </ul>
-                <h3>NerveX Neurotech | Embedded Software Developer</h3>
-                <p class="dates">Nov 2023 - March 2025</p>
-                <ul>
-                    <li>Embedded C/C++ firmware development for low-power wearables.</li>
-                    <li>Implemented signal processing pipelines for biometrics on Cortex-M MCUs.</li>
-                    <li>Wrote python scripts for tools and test rigs.</li>
-                    <li>Integrated peripherals including BLE, I2C, SPI, UART, PDM audio, NAND flash.</li>
-                    <li>PCB layout, SMT assembly, hardware debugging, and board bringup.</li>
-                </ul>
-                <h3>Garmin | Embedded Software Engineering Intern</h3>
-                <p class="dates">Sept 2021 - Aug 2022</p>
-                <ul>
-                    <li>Developed embedded C/C++ firmware for low-power wireless devices.</li>
-                    <li>WorkWorked with vendors on low-level integration of wireless protocols into Garmin products.</li>
-                    <li>Gained experience with BLE, WiFi, Bluetooth Classic, and ANT.</li>
-                    <li>Debugged hardware issues using spectrum analyzers, oscilloscopes, and logic analyzers.</li>
-                    <li>Documented software issues and test procedures using Jira and Confluence.</li>
-                </ul>
-                <h3>CNH Industrial | Embedded Software Engineering Intern</h3>
-                <p class="dates">May 2021 - Aug 2021</p>
-                <ul>
-                    <li>Developed embedded C firmware for agricultural equipment.</li>
-                    <li>Created graphical desktop applications with C# and WinForms.</li>
-                </ul>
-                <h3>University of Saskatchewan | B.Eng Computer Engineering</h3>
-                <p class="dates">Sept 2018 - April 2023</p>
-                <ul>
-                    <li>Graduated with great distinction. Focus in Digital Systems and Software.</li>
-                    <li>Awards for academic achievement:
-                        Douglas Durie Memorial Scholarship Fall 2020, Fall 2023 | Agra Memorial Scholarship Fall 2020 |
-                        Slapkauskas Scholarship in Engineering Winter 2021 | Dean's Honour Roll 2019, 2020, 2021, 2023.
-                    </li>
-                </ul>
-            </div>
-        </div>
+        <header class="masthead">
+            <h1>Hunter Whyte</h1>
+            <p class="role">Software Developer · Embedded Systems · Saskatoon, SK</p>
+            <nav class="links">
+                <a href="mailto:huntergwhyte@gmail.com" title="Email"><img src="mail.svg" alt="">huntergwhyte@gmail.com</a>
+                <a href="https://github.com/hunterwhyte" title="GitHub"><img src="github-mark.svg" alt="">github.com/hunterwhyte</a>
+                <a href="https://www.linkedin.com/in/hunter-whyte-995447161/" title="LinkedIn"><img src="linkedin.svg" alt="">hunterwhyte</a>
+                <a href="resume_hunter_whyte.pdf" title="Resume"><img src="resume.svg" alt="">resume</a>
+            </nav>
+        </header>
 
-        <div id="projects" class="tab tab-active" style="height: auto;">
+        <!-- ══════════ 01 PROJECTS ══════════ -->
+        <section id="projects">
+            <h2 class="tag"><span class="num">01</span> Projects <span class="line"></span></h2>
+
             <a href="jumptracker.html" class="project-link">
-                <div class="project">
+                <article class="project">
                     <div class="project-content">
-                        <p class="project-header">Jump Tracker <span class="project-date">June 2025</span>
-                        </p>
-
-                        <p class="project-summary">Low power wearable device that tracks jump height and frequency for athletes.
-                        </p>
+                        <p class="project-header">Jump Tracker <span class="project-date">June 2025</span></p>
+                        <p class="project-summary">Low power wearable device that tracks jump height and frequency for athletes.</p>
                         <ul>
                             <li>Created algorithms to detect flight time, ground contact time, and other metrics from 3-axis accelerometer output.</li>
                             <li>Developed embedded C++ firmware integrating I2C, BLE, and SPI flash.</li>
@@ -434,82 +279,73 @@
                             <li>Prototype cross-platform mobile app developed in dart/flutter.</li>
                         </ul>
                     </div>
-                    <video autoplay muted loop playsinline class="portrait" src="jumptracker/clip-export.mp4" alt="demo of project">
-                </div>
+                    <div class="thumb"><video autoplay muted loop playsinline src="jumptracker/clip-export.mp4"></video></div>
+                </article>
             </a>
-            <a href="https://github.com/HunterWhyte/WirelessLEDBracelet" class="project-link">
-                <div class="project">
-                    <div class="project-content">
-                        <p class="project-header">Wireless LED Bracelet <span class="project-date">March 2023</span>
-                        </p>
 
-                        <p class="project-summary">Wirelessly controlled light-up bracelet for use at concerts and live
-                            events.
-                        </p>
+            <a href="https://github.com/HunterWhyte/WirelessLEDBracelet" class="project-link">
+                <article class="project">
+                    <div class="project-content">
+                        <p class="project-header">Wireless LED Bracelet <span class="project-date">March 2023</span></p>
+                        <p class="project-summary">Wirelessly controlled light-up bracelet for use at concerts and live events.</p>
                         <ul>
                             <li>Designed PCB around nRF52 SoC. Assembled and debugged form factor prototype.</li>
-                            <li>Uses 2.4GHz radio to receive commands from controller and connect over BLE to
-                                smartphones.</li>
+                            <li>Uses 2.4GHz radio to receive commands from controller and connect over BLE to smartphones.</li>
                             <li>Developed embedded C firmware integrating UART, I2C, BLE, NFC, and ANT.</li>
                         </ul>
                     </div>
-                    <video autoplay muted loop src="braceletdemo.mp4" alt="demo of project">
-                </div>
+                    <div class="thumb"><video autoplay muted loop playsinline src="braceletdemo.mp4"></video></div>
+                </article>
             </a>
-            <a href="https://github.com/HunterWhyte/jumaudio" class="project-link">
-                <div class="project">
-                    <div class="project-content">
-                        <p class="project-header">Audio Visualization Library <span class="project-date">December
-                                2022</span></p>
 
-                        <p class="project-summary">Simple, cross-platform audio visualization library, with built-in
-                            file playback and capture.</p>
+            <a href="https://github.com/HunterWhyte/jumaudio" class="project-link">
+                <article class="project">
+                    <div class="project-content">
+                        <p class="project-header">Audio Visualization Library <span class="project-date">December 2022</span></p>
+                        <p class="project-summary">Simple, cross-platform audio visualization library, with built-in file playback and capture.</p>
                         <ul>
                             <li>Cross-platform C library for linux, windows, and web.</li>
                             <li>Captures audio from input or plays from files.</li>
                             <li>Performs DFT and does some creative filtering to make it look nice.</li>
                         </ul>
                     </div>
-                    <video autoplay muted loop src="audiovisdemo.mp4" alt="demo of project">
-                </div>
+                    <div class="thumb"><video autoplay muted loop playsinline src="audiovisdemo.mp4"></video></div>
+                </article>
             </a>
-            <a href="physics.html" class="project-link">
-                <div class="project">
-                    <div class="project-content">
-                        <p class="project-header">2D Collision Detection Library<span class="project-date">June
-                                2023</span></p>
 
-                        <p class="project-summary">Cross platform deterministic continuous 2D collision detection for
-                            convex polygons.</p>
+            <a href="physics.html" class="project-link">
+                <article class="project">
+                    <div class="project-content">
+                        <p class="project-header">2D Collision Detection Library <span class="project-date">June 2023</span></p>
+                        <p class="project-summary">Cross platform deterministic continuous 2D collision detection for convex polygons.</p>
                         <ul>
                             <li>Cross-platform C library for linux, windows, and web.</li>
                             <li>Implements bilateral advancement algorithm for continuous collision detection.</li>
                             <li>Guarantees determinism through use of softfloats.</li>
                         </ul>
                     </div>
-                    <video autoplay muted loop src="physdemo.mp4" alt="demo of project">
-                </div>
+                    <div class="thumb"><video autoplay muted loop playsinline src="physdemo.mp4"></video></div>
+                </article>
             </a>
-            <a href="https://github.com/HunterWhyte/jumgfx" class="project-link">
-                <div class="project">
-                    <div class="project-content">
-                        <p class="project-header">Graphics Framework <span class="project-date">March
-                                2024</span></p>
 
+            <a href="https://github.com/HunterWhyte/jumgfx" class="project-link">
+                <article class="project">
+                    <div class="project-content">
+                        <p class="project-header">Graphics Framework <span class="project-date">March 2024</span></p>
                         <p class="project-summary">2D node based OpenGL graphics framework.</p>
                         <ul>
                             <li>Cross-platform C framework for linux, windows, and web.</li>
                             <li>Node based graphics definitions/editor.</li>
                         </ul>
                     </div>
-                    <video autoplay muted loop src="menudemo.mp4" alt="demo of project">
-                </div>
+                    <div class="thumb"><video autoplay muted loop playsinline src="menudemo.mp4"></video></div>
+                </article>
             </a>
+
             <a href="https://itch.io/embed-upload/8390147?color=000000" class="project-link">
-                <div class="project">
+                <article class="project">
                     <div class="project-content">
                         <p class="project-header">Block Puzzle Game <span class="project-date">April 2022</span></p>
-
                         <p class="project-summary">Lumines inspired puzzle game written from scratch.</p>
                         <ul>
                             <li>Custom 2D OpenGL graphics engine with a framework enabling user generated content.</li>
@@ -518,33 +354,28 @@
                             <li>Written in Java.</li>
                         </ul>
                     </div>
-                    <video autoplay muted loop src="gamedemo.mp4" alt="demo of project">
-                </div>
+                    <div class="thumb"><video autoplay muted loop playsinline src="gamedemo.mp4"></video></div>
+                </article>
             </a>
-            <a href="https://github.com/HunterWhyte/jumnet" class="project-link">
-                <div class="project">
-                    <div class="project-content">
-                        <p class="project-header">P2P Networking Library<span class="project-date">September
-                                2023</span></p>
 
-                        <p class="project-summary">WebRTC datachannels based library for cross platform peer to
-                            peer rollback netcode.</p>
+            <a href="https://github.com/HunterWhyte/jumnet" class="project-link">
+                <article class="project">
+                    <div class="project-content">
+                        <p class="project-header">P2P Networking Library <span class="project-date">September 2023</span></p>
+                        <p class="project-summary">WebRTC datachannels based library for cross platform peer to peer rollback netcode.</p>
                         <ul>
                             <li>Cross-platform C library for linux, windows, and web.</li>
                             <li>Enables peer to peer rollback netcode in browser.</li>
                         </ul>
                     </div>
-                    <!-- <video autoplay muted loop src="audiovisdemo.mp4" alt="demo of project"> -->
-                </div>
+                </article>
             </a>
-            <a href="https://github.com/HunterWhyte/bbb-baremetal" class="project-link">
-                <div class="project">
-                    <div class="project-content">
-                        <p class="project-header">Baremetal ARM Cortex A8 Application <span
-                                class="project-date">February 2023</span></p>
 
-                        <p class="project-summary">Simple bare metal application for TI AM335x (Cortex-A8)
-                            microprocessor.</p>
+            <a href="https://github.com/HunterWhyte/bbb-baremetal" class="project-link">
+                <article class="project">
+                    <div class="project-content">
+                        <p class="project-header">Baremetal ARM Cortex A8 Application <span class="project-date">February 2023</span></p>
+                        <p class="project-summary">Simple bare metal application for TI AM335x (Cortex-A8) microprocessor.</p>
                         <ul>
                             <li>Written from scratch in C and ARM assembly language.</li>
                             <li>Tested on hardware using Beaglebone Black SBC.</li>
@@ -552,61 +383,58 @@
                             <li>Functions as second-stage bootloader.</li>
                         </ul>
                     </div>
-                    <img src="bbb.png">
-                </div>
+                    <div class="thumb"><img src="bbb.png" alt=""></div>
+                </article>
             </a>
-            <a href="https://github.com/HunterWhyte/synth" class="project-link">
-                <div class="project">
-                    <div class="project-content">
-                        <p class="project-header">STM32F4 Polyphonic MIDI Synthesizer <span class="project-date">January
-                                2021</span></p>
 
+            <a href="https://github.com/HunterWhyte/synth" class="project-link">
+                <article class="project">
+                    <div class="project-content">
+                        <p class="project-header">STM32F4 Polyphonic MIDI Synthesizer <span class="project-date">January 2021</span></p>
                         <ul>
                             <li>Direct MIDI input.</li>
                             <li>8 voice polyphonic output.</li>
                             <li>Written in C, tested on STM32F4 eval board.</li>
                         </ul>
                     </div>
-                    <img src="stm32f4disco.png">
-                </div>
+                    <div class="thumb"><img src="stm32f4disco.png" alt=""></div>
+                </article>
             </a>
+
             <a href="https://github.com/HunterWhyte/Rocket-Telemetry-Project" class="project-link">
-                <div class="project">
+                <article class="project">
                     <div class="project-content">
                         <p class="project-header">Rocket Telemetry <span class="project-date">April 2018</span></p>
-
                         <p class="project-summary">Realtime model rocket location/altitude tracking.</p>
                         <ul>
-                            <li>Arduino based rocket payload featuring 2.4GHz RF, GPS, IMU, remotely activated camera.
-                            </li>
+                            <li>Arduino based rocket payload featuring 2.4GHz RF, GPS, IMU, remotely activated camera.</li>
                             <li>Base station connects to graphical application written in Python.</li>
                             <li>Uses brushed motors + quadcopter props for descent steering.</li>
                         </ul>
                     </div>
-                    <img src="gpsdata.gif">
-                </div>
+                    <div class="thumb"><img src="gpsdata.gif" alt=""></div>
+                </article>
             </a>
+
             <a href="https://github.com/HunterWhyte/bluetooth-back-sensor" class="project-link">
-                <div class="project">
+                <article class="project">
                     <div class="project-content">
                         <p class="project-header">Posture Monitor <span class="project-date">December 2016</span></p>
-                        <p class="project-summary">Bluetooth enabled spinal position monitoring and posture correction
-                            device.</p>
+                        <p class="project-summary">Bluetooth enabled spinal position monitoring and posture correction device.</p>
                         <ul>
                             <li>Uses a stretch sensor to measure the distance between two points on the spine.</li>
                             <li>Measures current spine position against a calibrated ideal position.</li>
                             <li>Notifies user via vibration/lights and smartphone app.</li>
                         </ul>
                     </div>
-                    <img src="posture_monitor.png">
-                </div>
+                    <div class="thumb"><img src="posture_monitor.png" alt=""></div>
+                </article>
             </a>
-            <a href="https://github.com/HunterWhyte/term-music" class="project-link">
-                <div class="project">
-                    <div class="project-content">
-                        <p class="project-header">ncurses MIDI Sequencer <span class="project-date">March
-                                2019</span></p>
 
+            <a href="https://github.com/HunterWhyte/term-music" class="project-link">
+                <article class="project">
+                    <div class="project-content">
+                        <p class="project-header">ncurses MIDI Sequencer <span class="project-date">March 2019</span></p>
                         <p class="project-summary">Basic ncurses MIDI sequencer (bad idea).</p>
                         <ul>
                             <li>Takes keyboard input as different notes.</li>
@@ -614,14 +442,14 @@
                             <li>Written in C.</li>
                         </ul>
                     </div>
-                    <img src="midi_sequencer.png">
-                </div>
+                    <div class="thumb"><img src="midi_sequencer.png" alt=""></div>
+                </article>
             </a>
+
             <a href="https://github.com/HunterWhyte/MIDIbot" class="project-link">
-                <div class="project">
+                <article class="project">
                     <div class="project-content">
                         <p class="project-header">MIDI Chat Bot <span class="project-date">March 2020</span></p>
-
                         <p class="project-summary">IRC bot that plays MIDI notes on host computer.</p>
                         <ul>
                             <li>Intended for use while livestreaming so that viewers can interactively play notes.</li>
@@ -629,61 +457,124 @@
                             <li>Written in Python.</li>
                         </ul>
                     </div>
-                </div>
+                </article>
             </a>
+
             <a href="https://github.com/HunterWhyte/handlookup" class="project-link">
-                <div class="project">
+                <article class="project">
                     <div class="project-content">
                         <p class="project-header">Poker Study Tool <span class="project-date">May 2020</span></p>
-
-
                         <p class="project-summary">A study tool for 3 person sit and gos.</p>
                         <ul>
                             <li>Looks up correct play for a given situation from a study guide.</li>
                             <li>Takes into account, position, stack, preflop action, and hand.</li>
                         </ul>
                     </div>
-                    <img src="poker_study_tool.png">
-                </div>
+                    <div class="thumb"><img src="poker_study_tool.png" alt=""></div>
+                </article>
             </a>
+
             <a href="https://github.com/HunterWhyte/Poker-Odds-and-Tracker" class="project-link">
-                <div class="project">
+                <article class="project">
                     <div class="project-content">
-                        <p class="project-header">Poker Hand History Parser <span class="project-date">May 2020</span>
-                        </p>
-                        <p class="project-summary">Hand history parser for party poker with cEV calculator and graphing.
-                        </p>
+                        <p class="project-header">Poker Hand History Parser <span class="project-date">May 2020</span></p>
+                        <p class="project-summary">Hand history parser for party poker with cEV calculator and graphing.</p>
                         <ul>
                             <li>Takes plaintext poker site hand histories as input.</li>
                             <li>Parses into database for tracking useful stats.</li>
                             <li>Odds calculator determines and records cEV.</li>
                         </ul>
                     </div>
-                    <img src="hand_history.png">
-                </div>
+                    <div class="thumb"><img src="hand_history.png" alt=""></div>
+                </article>
             </a>
+
             <a href="https://github.com/HunterWhyte/usb-midi-keyboard" class="project-link">
-                <div class="project">
+                <article class="project">
                     <div class="project-content">
                         <p class="project-header">USB MIDI Keyboard <span class="project-date">December 2016</span></p>
-                        <p class="project-summary">USB MIDI keyboard made from a broken electric piano I got for free.
-                        </p>
+                        <p class="project-summary">USB MIDI keyboard made from a broken electric piano I got for free.</p>
                         <ul>
                             <li>Ripped keyboard out of piano and wired up the key matrix to an Arduino.</li>
                             <li>Full 88-key velocity sensitive MIDI keyboard.</li>
                             <li>Arduino acts as HID USB-MIDI device.</li>
                         </ul>
                     </div>
-                    <img src="usb_midi_keyboard.png">
-                </div>
+                    <div class="thumb"><img src="usb_midi_keyboard.png" alt=""></div>
+                </article>
             </a>
-        </div>
+        </section>
+
+        <!-- ══════════ 02 EXPERIENCE ══════════ -->
+        <section id="experience">
+            <h2 class="tag"><span class="num">02</span> Experience <span class="line"></span></h2>
+
+            <article class="entry">
+                <h3>Garmin Canada — Software Developer I, Software Developer II</h3>
+                <p class="dates">August 2024 – May 2025 · June 2025 – Present</p>
+                <ul>
+                    <li>Embedded C/C++ firmware development targeting baremetal and RTOS-based environments.</li>
+                    <li>Contributed to low level core platform technology used across multiple products.</li>
+                    <li>Worked as part of a team responsible for bootloader development and OTA update support.</li>
+                    <li>Worked closely with vendors to bring up new SoC platforms for use in Garmin products.</li>
+                    <li>Created and maintained automated regression tests that run on hardware as part of CI.</li>
+                </ul>
+            </article>
+
+            <article class="entry">
+                <h3>NerveX Neurotech — Embedded Software Developer</h3>
+                <p class="dates">Nov 2023 – March 2025</p>
+                <ul>
+                    <li>Embedded C/C++ firmware development for low-power wearables.</li>
+                    <li>Implemented signal processing pipelines for biometrics on Cortex-M MCUs.</li>
+                    <li>Wrote python scripts for tools and test rigs.</li>
+                    <li>Integrated peripherals including BLE, I2C, SPI, UART, PDM audio, NAND flash.</li>
+                    <li>PCB layout, SMT assembly, hardware debugging, and board bringup.</li>
+                </ul>
+            </article>
+
+            <article class="entry">
+                <h3>Garmin — Embedded Software Engineering Intern</h3>
+                <p class="dates">Sept 2021 – Aug 2022</p>
+                <ul>
+                    <li>Developed embedded C/C++ firmware for low-power wireless devices.</li>
+                    <li>Worked with vendors on low-level integration of wireless protocols into Garmin products.</li>
+                    <li>Gained experience with BLE, WiFi, Bluetooth Classic, and ANT.</li>
+                    <li>Debugged hardware issues using spectrum analyzers, oscilloscopes, and logic analyzers.</li>
+                    <li>Documented software issues and test procedures using Jira and Confluence.</li>
+                </ul>
+            </article>
+
+            <article class="entry">
+                <h3>CNH Industrial — Embedded Software Engineering Intern</h3>
+                <p class="dates">May 2021 – Aug 2021</p>
+                <ul>
+                    <li>Developed embedded C firmware for agricultural equipment.</li>
+                    <li>Created graphical desktop applications with C# and WinForms.</li>
+                </ul>
+            </article>
+
+            <article class="entry">
+                <h3>University of Saskatchewan — B.Eng Computer Engineering</h3>
+                <p class="dates">Sept 2018 – April 2023</p>
+                <ul>
+                    <li>Graduated with great distinction. Focus in Digital Systems and Software.</li>
+                    <li>Awards for academic achievement: Douglas Durie Memorial Scholarship Fall 2020, Fall 2023 |
+                        Agra Memorial Scholarship Fall 2020 | Slapkauskas Scholarship in Engineering Winter 2021 |
+                        Dean's Honour Roll 2019, 2020, 2021, 2023.</li>
+                </ul>
+            </article>
+        </section>
+
+        <footer>
+            <div class="inner">
+                <span>© 2026 Hunter Whyte</span>
+            </div>
+        </footer>
+
     </div>
 
-    <div class="footer">
-        &copy; 2024 Hunter Whyte
-    </div>
-
+    <script src="index.js"></script>
 </body>
 
 </html>
