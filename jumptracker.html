@@ -1,277 +1,362 @@
-<!doctypehtml>
-  <html lang=en-us>
+<!doctype html>
+<html lang="en-us">
 
-  <head>
-    <meta charset=utf-8>
-    <meta content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no" name=viewport>
-    <title>Hunter GW | Jump Clip</title>
-    <style>
-      body {
-        margin: 50;
-        justify-content: center;
-        align-items: center;
-        background-color: #000;
-        display: flex;
-      }
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hunter GW | JUMPCLIP</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@700;900&family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-      .contents {
-        font-family: Georgia;
-        font-size: 0.75em;
-        margin: auto;
-        width: 75%;
-        max-width: 800px;
-        text-align: left;
-        justify-content: center;
-        align-items: center;
-        color: rgb(238, 234, 227);
-        position: relative;
-      }
+    :root {
+      --bg:   #08080f;
+      --s1:   #111119;
+      --s2:   #1a1a26;
+      --s3:   #26263a;
+      --tx:   #ffffff;
+      --tx2:  #a8a8c0;
+      --tx3:  #585870;
+      --volt: #a3ff3c;
+      --core: #5ae71d;
+      --deep: #22a30a;
+      --disp: 'Saira Condensed', sans-serif;
+      --ui:   'Space Grotesk', sans-serif;
+      --mono: 'Space Mono', monospace;
+    }
 
-      .video-container {
-        width: 100%;
-        max-width: 800px;
-        height: auto;
-        aspect-ratio: 16 / 9;
-        margin: 20px auto;
-        position: relative;
-        overflow: hidden;
-        border-radius: 10px;
-        border: 1px solid white;
-      }
+    html { scroll-behavior: smooth; }
 
-      .video-container video {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
-      }
+    body {
+      background: var(--bg);
+      color: var(--tx);
+      font-family: var(--ui);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
 
-      iframe {
-        width: 100%;
-        height: 100%;
-        margin: auto;
-        border: 1px solid white;
-      }
+    ::selection { background: var(--core); color: #03210b; }
 
-      .contents h1 {
-        text-align: center;
-        /* Centers the text of the h1 element */
-      }
+    .wrap { max-width: 880px; margin: 0 auto; padding: 0 40px; }
+    section { border-top: 1px solid var(--s3); }
+    .sec-pad { padding: 76px 0; }
 
-      .contents ul {
-        font-size: 1.2em;
-        /* Centers the text of the h1 element */
-      }
+    /* ── Mark ─────────────────────────────────────────── */
+    .mark { display: block; --mark-stroke: var(--core); }
+    .mark polyline {
+      stroke: var(--mark-stroke);
+      fill: none;
+      stroke-width: 9;
+      stroke-linecap: square;
+      stroke-linejoin: miter;
+      stroke-miterlimit: 6;
+    }
+    .mark.echo polyline.trail { stroke: var(--mark-stroke); opacity: 0.16; }
 
-      .contents h3 {
-        text-align: left;
-        font-size: 1.5em;
-        font-weight: 100;
-        /* Centers the text of the h1 element */
-      }
+    .wordmark {
+      font-family: var(--disp);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: -0.005em;
+      line-height: 0.8;
+      white-space: nowrap;
+    }
+    .grad { color: var(--core); }
 
-      .contents h4 {
-        color: rgb(147, 147, 147);
-        font-weight: 100;
-        font-size: 1.5em;
-        text-align: center;
-        /* Centers the text of the h1 element */
-        margin-top: -15px;
-      }
+    /* ── Masthead ─────────────────────────────────────── */
+    .masthead { border-bottom: 1px solid var(--s3); }
+    .masthead-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      padding: 19px 0;
+    }
+    .lockup-h { display: inline-flex; align-items: center; gap: 9px; }
+    .lockup-h .mark { width: 20px; height: 20px; flex-shrink: 0; }
+    .lockup-h .wordmark { font-size: 16px; color: var(--tx); }
+    .masthead .back {
+      font-family: var(--mono);
+      font-size: 11.5px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--tx3);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    .masthead .back:hover { color: var(--core); }
 
-      .contents h5 {
-        color: rgb(233, 233, 233);
-        font-weight: 250;
-        font-size: 1.3em;
-        text-align: center;
-        /* Centers the text of the h1 element */
-        margin-top: 0px;
-      }
+    /* ── Section furniture ────────────────────────────── */
+    .tag {
+      font-family: var(--mono);
+      font-weight: 400;
+      font-size: 12px;
+      letter-spacing: 0.34em;
+      text-transform: uppercase;
+      color: var(--tx2);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 34px;
+    }
+    .tag .num { color: var(--core); }
+    .tag .line { flex: 1; height: 1px; background: var(--s3); }
+    .tag .wip {
+      color: var(--tx3);
+      border: 1px solid var(--s3);
+      border-radius: 999px;
+      padding: 3px 10px;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+    }
 
-      .contents p {
-        font-size: 1.4em;
-        text-align: left;
-        /* Centers the text of the h1 element */
-      }
+    h1.page-h {
+      font-family: var(--ui);
+      font-weight: 600;
+      font-size: clamp(24px, 3vw, 30px);
+      line-height: 1.25;
+      letter-spacing: -0.012em;
+      color: var(--tx);
+      margin-bottom: 14px;
+    }
 
-      .quote-highlight {
-        background-color: #373737;
-        color: #fff;
-        /* Light grey background */
-        font-style: italic;
-        /* Optional: italicize the quote */
-      }
+    .byline {
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--tx3);
+      margin-bottom: 40px;
+    }
+    .byline a { color: var(--core); text-decoration: none; }
+    .byline a:hover { text-decoration: underline; }
 
-      .source-link {
-        color: #ccc;
-        text-decoration: none;
-      }
+    p { font-size: 16.5px; color: var(--tx2); margin-bottom: 20px; text-wrap: pretty; }
+    p b, p strong { color: var(--tx); font-weight: 600; }
+    .lead { font-size: 17.5px; }
 
-      .source-link:hover {
-        color: #fff;
-        text-decoration: underline;
-      }
+    ul.spec { list-style: none; margin: 0 0 26px; }
+    ul.spec li {
+      font-family: var(--mono);
+      font-size: 13.5px;
+      color: var(--tx2);
+      padding: 12px 0;
+      border-top: 1px solid var(--s3);
+      display: flex;
+      gap: 14px;
+    }
+    ul.spec li::before { content: '›'; color: var(--core); }
 
-      .side-note {
-        color: #ccc;
-        font-size: 0.75em;
-        font-weight: 100;
-      }
+    /* ── Media ────────────────────────────────────────── */
+    figure {
+      background: var(--s1);
+      border: 1px solid var(--s3);
+      border-radius: 16px;
+      overflow: hidden;
+      margin: 30px 0;
+    }
+    figure img, figure video { display: block; width: 100%; height: auto; }
+    figcaption {
+      font-family: var(--mono);
+      font-size: 11.5px;
+      line-height: 1.6;
+      letter-spacing: 0.06em;
+      color: var(--tx3);
+      padding: 14px 18px;
+      border-top: 1px solid var(--s3);
+    }
+    figure.plain { background: transparent; border: none; border-radius: 0; }
+    figure.plain figcaption { border-top: none; padding: 12px 0 0; }
 
-      .image-container {
-        width: auto;
-        height: 150px;
-        display: flex;
-        /* Use flexbox to center the image */
-        justify-content: center;
-        /* Center horizontally */
-        align-items: center;
-        /* Center vertically */
-        margin: auto;
-        /* Space above and below the image container */
-      }
+    /* portrait clip sits beside its caption on wide screens */
+    .clip-row { display: grid; grid-template-columns: 300px 1fr; gap: 34px; align-items: start; }
+    .clip-row figure { margin: 0; }
+    .clip-row video { border-radius: 15px; }
+    .clip-note p:last-child { margin-bottom: 0; }
 
-      .image-container2 {
-        width: auto;
-        height: 300px;
-        display: flex;
-        /* Use flexbox to center the image */
-        justify-content: center;
-        /* Center horizontally */
-        align-items: center;
-        /* Center vertically */
-        margin: auto;
-        /* Space above and below the image container */
-      }
+    /* phone screenshot grid */
+    .shots { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin: 30px 0; }
+    .shots figure { margin: 0; background: var(--s2); }
+    .shots figcaption { padding: 11px 13px; font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; }
 
-      .image-container3 {
-        width: auto;
-        height: 500px;
-        display: flex;
-        /* Use flexbox to center the image */
-        justify-content: center;
-        /* Center horizontally */
-        align-items: center;
-        /* Center vertically */
-        margin: auto;
-        /* Space above and below the image container */
-      }
+    /* ── Footer ───────────────────────────────────────── */
+    footer { border-top: 1px solid var(--s3); padding: 44px 0 64px; }
+    .foot {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--tx3);
+    }
+    .foot a { color: var(--tx3); text-decoration: none; }
+    .foot a:hover { color: var(--core); }
+    .foot-l { display: flex; align-items: center; gap: 14px; }
+    .foot .mark { width: 30px; height: 30px; }
 
-      img {
-        width: 100%;
-        height: 100%;
-        object-fit: contain; /* or 'cover' if you want it to fill without letterboxing */
-        display: block;
-      }
+    @media (max-width: 820px) {
+      .wrap { padding: 0 22px; }
+      .sec-pad { padding: 56px 0; }
+      .clip-row { grid-template-columns: 1fr; gap: 22px; }
+      .clip-row figure { max-width: 300px; margin: 0 auto; }
+      .shots { grid-template-columns: repeat(2, 1fr); }
+    }
 
-      .code-block {
-        font-family: 'Courier New', Courier, monospace;
-        background-color: #211e1d;
-        color: #ebdbb2;
-        padding-left: 5px;
-        border-radius: 5px;
-        overflow-x: auto;
-        white-space: pre;
-      }
+    @media (max-width: 480px) {
+      .shots { grid-template-columns: 1fr 1fr; gap: 12px; }
+    }
+  </style>
+</head>
 
-      .keyword {
-        color: #e78a4e;
-      }
+<body>
 
-      .string {
-        color: #b8bb26;
-      }
+  <!-- ══════════ MASTHEAD ══════════ -->
+  <header class="masthead">
+    <div class="wrap masthead-inner">
+      <span class="lockup-h">
+        <svg class="mark" viewBox="0 0 100 100" fill="none">
+          <polyline points="26,47 50,27 74,47" />
+          <polyline points="26,67 50,47 74,67" />
+        </svg>
+        <span class="wordmark"><span>JUMP</span><span class="grad">CLIP</span></span>
+      </span>
+      <a class="back" href="index.html">← Hunter Whyte</a>
+    </div>
+  </header>
 
-      .comment {
-        color: #928374;
-      }
+  <!-- ══════════ OVERVIEW ══════════ -->
+  <section class="sec-pad">
+    <div class="wrap">
+      <div class="tag"><span class="num">00</span> Overview <span class="line"></span><span class="wip">WIP</span></div>
+      <h1 class="page-h">Wearable jump tracking device for athletes</h1>
+      <div class="byline">Hunter Whyte · June 2025 · <a href="https://github.com/HunterWhyte">source code</a></div>
 
-      .number {
-        color: #d3869b;
-      }
+      <p class="lead"><b>The goal:</b> Detect jump height and frequency for progression tracking and stress monitoring
+        in athletes.</p>
+      <p><b>Theory of operation:</b> Continuously monitor for flight time and ground contact time events using a
+        wearable 3-axis accelerometer, and upload the results to a mobile app over BLE.</p>
+      <p>Jump height, and other metrics such as RSI (reactive strength index) can be derived from flight time using
+        basic projectile motion equations (with an added calibration factor).</p>
 
-      .function {
-        color: #a9b665;
-      }
-
-      .variable {
-        color: #e4e2c9;
-      }
-
-      .project-content {
-        flex: 1
-      }
-
-      .video {
-        height: auto;
-        width: auto;
-        margin-left: 5px;
-        border-radius: 5px;
-      }
-    </style>
-  </head>
-
-  <body>
-    <div class="contents">
-      <h1>[WIP] Wearable Jump Tracking Device for Athletes</h1>
-      <h4>Hunter Whyte · June 2025<br><a href="https://github.com/HunterWhyte" class="source-link">source
-          code</a></h4>
-      <p></p>
-      <p><b>The goal:</b> Detect jump height and frequency for progression tracking and stress monitoring in athletes.
-      </p>
-      <p>
-        <b>Theory of operation:</b> Continuously monitor for flight time and ground contact time events using a wearable
-        3-axis accelerometer, and upload the results to a mobile app over BLE.
-      </p>
-      <p>
-        Jump height, and other metrics such as RSI (reactive strength index) can be derived from flight time using basic
-        projectile motion equations (with an added calibration factor).
-      </p>
-      <div class="project-content">
-        <div class="video-container">
-          <video autoplay muted loop playsinline src="jumpdemo.mp4"></video>
+      <div class="clip-row">
+        <figure>
+          <video autoplay muted loop playsinline src="jumptracker/clip-export.mp4"></video>
+        </figure>
+        <div class="clip-note">
+          <p>Video overlay generated automatically using outputs from on-device processing.</p>
+          <p style="font-family: var(--mono); font-size: 12.5px; color: var(--tx3);">
+            Height, flight time and ground contact are burned into the clip by the mobile app after the session
+            is synced.
+          </p>
         </div>
       </div>
-        <h5>Video overlay generated automatically using outputs from on-device processing.</h5>
-      <h2>Hardware Design</h2>
-      <p><b>PCB:</b> There are 4 main ICs used in the design:
-      <ul>
-        <li>SoC capable of BLE and signal processing</li>
-        <li>3-Axis accelerometer</li>
-        <li>NOR flash</li>
-        <li>PMIC for rechargeable battery</li>
-      </ul>
-      </p>
-      <div class="image-container">
-        <img src="jumpclip3.png">
+    </div>
+  </section>
+
+  <!-- ══════════ 01 HARDWARE ══════════ -->
+  <section class="sec-pad">
+    <div class="wrap">
+      <h2 class="tag"><span class="num">01</span> Hardware Design <span class="line"></span></h2>
+
+      <figure>
+        <img src="jumptracker/jumpclip3.webp" alt="3D render of the jump tracker PCB">
+        <figcaption>Board render — SoC module, accelerometer, NOR flash and PMIC on a single thin PCB.</figcaption>
+      </figure>
+
+      <p><b>Form Factor:</b> The jump tracking device needs to be discreet and unobstructive for in-game use by ball
+        sport athletes (basketball, volleyball etc.). The form factor of the device is a thin clip to be worn on the
+        athlete's waistband (prototype dimensions: ~38mm x 13mm x 7.5mm).</p>
+
+      <figure>
+        <img src="jumptracker/jumpclip1.webp" alt="Printed enclosure, battery and PCB, and the assembled clip held between two fingers">
+        <figcaption>Left — printed enclosure, LiPo cell and populated board. Right — assembled prototype at scale.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ══════════ 03 PROCESSING & VALIDATION ══════════ -->
+  <section class="sec-pad">
+    <div class="wrap">
+      <h2 class="tag"><span class="num">02</span> Processing &amp; Validation <span class="line"></span><span class="wip">WIP</span></h2>
+      <p>[WIP] — tooling built so far:</p>
+
+      <figure>
+        <img src="jumptracker/validator.webp" alt="JumpValidator tool showing a video frame beside the accelerometer trace with event markers">
+        <figcaption>JumpValidator — high frame rate video is scrubbed to the frame of takeoff and landing and marked by
+          hand, then lined up against the accelerometer trace to produce labelled ground truth for each jump.</figcaption>
+      </figure>
+
+      <figure>
+        <img src="jumptracker/inspector.webp" alt="JumpInspector tool comparing baseline and candidate detection algorithms over a recorded session">
+        <figcaption>JumpInspector — replays a recorded session through several candidate detection algorithms at once
+          and diffs their event markers and jump counts against the labelled baseline.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ══════════ 04 MOBILE APP ══════════ -->
+  <section class="sec-pad">
+    <div class="wrap">
+      <h2 class="tag"><span class="num">03</span> Mobile App <span class="line"></span><span class="wip">WIP</span></h2>
+      <p>[WIP] — the app scans for nearby clips over BLE, records a live session, and can burn the resulting jump data
+        into a video of the session.</p>
+
+      <div class="shots">
+        <figure>
+          <img src="jumptracker/app-scan.webp" alt="Nearby devices screen listing two clips found over BLE">
+          <figcaption>01 · Scan</figcaption>
+        </figure>
+        <figure>
+          <img src="jumptracker/app-connecting.webp" alt="Connecting screen with BLE progress ring">
+          <figcaption>02 · Connect</figcaption>
+        </figure>
+        <figure>
+          <img src="jumptracker/app-home.webp" alt="App home screen with connected device, start session and make a clip">
+          <figcaption>03 · Home</figcaption>
+        </figure>
+        <figure>
+          <img src="jumptracker/app-session.webp" alt="Live session screen with session stats, acceleration profile and jump log">
+          <figcaption>04 · Live session</figcaption>
+        </figure>
+        <figure>
+          <img src="jumptracker/app-sync.webp" alt="Sync screen scrubbing video to the takeoff frame">
+          <figcaption>05 · Sync to takeoff</figcaption>
+        </figure>
+        <figure>
+          <img src="jumptracker/app-render.webp" alt="Rendering progress screen compositing the overlay">
+          <figcaption>06 · Render</figcaption>
+        </figure>
       </div>
-      <p>
-        <b>Form Factor:</b> The jump tracking device needs to be discreet and unobstructive for in-game use by ball
-        sport athletes
-        (basketball, volleyball etc.). The form factor of the device is a thin clip to be worn on the athlete's
-        waistband (prototype dimensions: ~38mm x 13mm x 7.5mm)
-      </p>
-      <div class="image-container2">
-        <img src="jumpclip1.png">
-      </div>
 
-      <h2>Firmware Design</h2>
-      <p> [WIP]
-      </p>
-
-      <h2>Processing Pipelines and Validation</h2>
-      <p> [WIP]
-      </p>
-
-      <h2>Mobile App</h2>
-      <p> [WIP]
-      </p>
-      <div class="image-container3">
-        <img src="jumpclipapp.png">
-      </div>
-
+      <p style="font-family: var(--mono); font-size: 12.5px; color: var(--tx3); margin-bottom: 0;">
+        Session view shows best and average height and flight time, a per-jump takeoff / flight / landing acceleration
+        profile, and the running jump log.
       </p>
     </div>
-  </body>
+  </section>
 
-  </html>
+  <!-- ══════════ FOOTER ══════════ -->
+  <footer>
+    <div class="wrap">
+      <div class="foot">
+        <div class="foot-l">
+          <svg class="mark" viewBox="0 0 100 100" fill="none">
+            <polyline points="26,47 50,27 74,47" />
+            <polyline points="26,67 50,47 74,67" />
+          </svg>
+          <span>JUMPCLIP · Hunter Whyte</span>
+        </div>
+        <span><a href="index.html">← All projects</a></span>
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+</html>
